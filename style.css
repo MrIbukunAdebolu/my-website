@@ -1,0 +1,369 @@
+/* ──────────────── GLOBAL STYLES ──────────────── */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  background-color: #f5f8fa;
+  color: #002b5b;
+  overflow-x: hidden;
+}
+
+/* ──────────────── NAVIGATION ──────────────── */
+header {
+  position: fixed;
+  top: 20px;
+  right: 40px;
+  z-index: 10;
+  background-color: #fff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 43, 91, 0.1);
+}
+
+nav a {
+  margin-left: 20px;
+  text-decoration: none;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  color: #002b5b;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #00a86b;
+}
+
+/* ──────────────── HERO SECTION ──────────────── */
+.hero {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: background-image 1s ease-in-out;
+  overflow: hidden;
+}
+
+.overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 43, 91, 0.35);
+  z-index: 1;
+}
+
+.hero-text {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: #fff;
+}
+
+.hero-text h1 {
+  font-size: 4rem;
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+}
+
+.hero-text p {
+  font-size: 1.5rem;
+  margin-top: 10px;
+}
+
+/* ──────────────── SECTION STYLING ──────────────── */
+section:not(.hero):not(.services-section) {
+  padding: 80px 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+section p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+/* ──────────────── LEADERSHIP SECTION ──────────────── */
+.leadership-section {
+  margin-top: 20px;
+  padding-left: 0;
+}
+
+.leadership-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.leader-image {
+  flex: 1;
+  min-width: 280px;
+  text-align: center;
+}
+
+.leader-image img {
+  max-width: 300px;
+  width: 100%;
+  border-radius: 12px;
+  transition: transform 0.4s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.leader-image img:hover {
+  transform: scale(1.05);
+}
+
+.caption {
+  font-size: 0.95rem;
+  color: #555;
+  margin-top: 10px;
+}
+
+.leader-text {
+  flex: 2;
+  min-width: 280px;
+}
+
+/* ──────────────── SERVICES SECTION ──────────────── */
+.services-section {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  background: linear-gradient(to bottom, #0a0f2c, #000);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.services-section .container {
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  text-align: center;
+  z-index: 1;
+}
+
+.stars {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url('https://www.transparenttextures.com/patterns/stardust.png') repeat;
+  opacity: 0.1;
+  z-index: 0;
+  animation: moveStars 60s linear infinite;
+}
+
+@keyframes moveStars {
+  from { background-position: 0 0; }
+  to { background-position: -1000px 1000px; }
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  margin-top: 40px;
+}
+
+@media (max-width: 1024px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.service-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 30px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  border: 2px solid rgba(0, 255, 255, 0.2);
+  border-radius: 16px;
+  animation: orbitGlow 2s infinite ease-in-out;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.service-card:hover::before {
+  opacity: 1;
+}
+
+@keyframes orbitGlow {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.icon {
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.service-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.service-desc {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.cta-button {
+  margin-top: 60px;
+  padding: 15px 30px;
+  font-size: 18px;
+  font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(90deg, #00f0ff, #0077ff);
+  border: none;
+  border-radius: 30px;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.cta-button:hover {
+  transform: scale(1.05);
+}
+
+.fade-in {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+/* ──────────────── FOOTER ──────────────── */
+footer {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #002b5b;
+  color: #fff;
+}
+
+
+/* ──────────────── CONTACT FORM ──────────────── */
+.contact-form {
+  background: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 43, 91, 0.05);
+  margin-top: 40px;
+}
+
+.form-group {
+  margin-bottom: 25px;
+}
+
+.contact-form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.contact-form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.submit-btn {
+  background-color: #00a86b;
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  font-size: 1rem;
+  font-family: 'Montserrat', sans-serif;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #008f5c;
+}
+
+.form-disclaimer {
+  font-size: 0.85rem;
+  color: #555;
+  margin-top: 20px;
+  line-height: 1.4;
+}
+
+/* ──────────────── CAPTCHA STYLING ──────────────── */
+.form-group.captcha {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.form-group.captcha input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #00a86b;
+  cursor: pointer;
+}
+
+.form-group.captcha label {
+  font-size: 1rem;
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+}
