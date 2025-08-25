@@ -1,261 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nexus Space Ltd</title>
-  <style>
-    :root {
-      --cosmos-blue: #002B5B;
-      --eco-green: #00A86B;
-      --gray-mist: #F5F5F5;
-    }
-
-    body {
-      margin: 0;
-      font-family: 'Montserrat', Arial, sans-serif;
-      background-color: var(--gray-mist);
-      color: var(--cosmos-blue);
-    }
-
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 3rem;
-      background-color: white;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-    header img {
-      height: 50px;
-    }
-
-    nav a {
-      margin-left: 20px;
-      text-decoration: none;
-      color: var(--cosmos-blue);
-      font-weight: 500;
-    }
-
-    nav a:hover {
-      color: var(--eco-green);
-    }
-
-    .hero {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      height: 100vh;
-      background: linear-gradient(rgba(0,43,91,0.7), rgba(0,43,91,0.7)),
-                  url('space-background.jpg') center/cover no-repeat;
-      color: white;
-    }
-
-    .hero img {
-      height: 100px;
-      margin-bottom: 20px;
-    }
-
-    .hero h1 {
-      font-size: 3rem;
-      margin: 0.5rem 0;
-    }
-
-    .hero p {
-      font-size: 1.3rem;
-      margin: 0.5rem 0;
-      color: var(--eco-green);
-    }
-
-    .btn {
-      margin-top: 20px;
-      padding: 12px 30px;
-      background: var(--eco-green);
-      border: none;
-      border-radius: 25px;
-      color: white;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    .btn:hover {
-      background: #008f5c;
-    }
-
-    section {
-      padding: 4rem 10%;
-    }
-
-    .about, .services, .contact {
-      background: white;
-      margin-bottom: 2rem;
-      border-radius: 15px;
-      padding: 3rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    }
-
-    /* Section Title */
-    h2 {
-      text-align: center;
-      margin-bottom: 2rem;
-      color: var(--cosmos-blue);
-      font-size: 2rem;
-      position: relative;
-      display: inline-block;
-    }
-
-    h2::after {
-      content: "";
-      display: block;
-      width: 80px;
-      height: 4px;
-      background: var(--eco-green);
-      margin: 0.5rem auto 0;
-      border-radius: 2px;
-    }
-
-    /* Subheading Styling */
-    .about h3 {
-      color: var(--eco-green);
-      font-size: 1.5rem;
-      margin-top: 2rem;
-      margin-bottom: 1rem;
-      position: relative;
-      padding-bottom: 0.3rem;
-    }
-
-    .about h3::after {
-      content: "";
-      display: block;
-      width: 60px;
-      height: 3px;
-      background: var(--cosmos-blue);
-      margin-top: 0.4rem;
-      border-radius: 2px;
-    }
-
-    .about ul {
-      padding-left: 1.2rem;
-      line-height: 1.7;
-    }
-
-    .about p {
-      line-height: 1.7;
-    }
-
-    footer {
-      background: var(--cosmos-blue);
-      color: white;
-      text-align: center;
-      padding: 1.5rem;
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Montserrat:wght@700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Header -->
+
+  <!-- Navigation -->
   <header>
-    <img src="logo.png" alt="Nexus Space Logo">
     <nav>
-      <a href="#about">About</a>
-      <a href="#services">Services</a>
-      <a href="#contact">Contact</a>
+      <a href="index3.html">Home</a>
+      <a href="#about">About Us</a>
+      <a href="#services">Our Services</a>
+      <a href="#careers">Careers</a>
+      <a href="#leadership">Leadership</a>
+      <a href="#contact">Contact Us</a>
     </nav>
   </header>
 
-  <!-- Hero -->
-  <section class="hero">
-    <img src="logo.png" alt="Nexus Space Logo">
-    <h1>Welcome to Nexus Space Ltd</h1>
-    <p>Space. Strategy. Impact.</p>
-    <button class="btn">Discover More</button>
+  <!-- Hero Section -->
+  <section id="hero" class="hero">
+    <div class="overlay"></div>
+    <div class="hero-text">
+      <h1>Nexus Space Ltd</h1>
+      <p>Innovating for planetary health and space sustainability</p>
+    </div>
   </section>
 
-  <!-- About -->
-  <section id="about" class="about">
+  <!-- About Us Section -->
+<section id="about">
+  <div class="container">
     <h2>About Us</h2>
     <p>
-      We are a global consultancy at the intersection of space systems engineering, climate resilience, 
-      and planetary health. Our team brings together deep expertise in aerospace design, geospatial 
-      intelligence, and environmental health to solve complex challenges using space-based technologies 
-      and data science.
+      <strong>Nexus Space Ltd</strong> is a global consultancy at the frontier of space systems engineering, climate resilience, and planetary health. We specialize in designing and deploying small satellite platforms, integrating Earth observation data, and applying AI-driven analytics to solve real-world challenges across Africa and beyond.
     </p>
-
-    <h3>Our Mission</h3>
     <p>
-      To empower governments, research institutions, and private enterprises with innovative, 
-      data-driven solutions that leverage satellite systems and Earth observation for sustainable 
-      development, public health, and climate adaptation.
+      As governments, space agencies, and research institutions increasingly invest in satellite development, Earth observation, and climate-smart innovation, Nexus Space Ltd stands ready as a trusted collaborator. Our team brings decades of experience in CubeSat design, geospatial intelligence, and environmental health modeling—making us uniquely positioned to support capacity building, technology transfer, and institutional strengthening across diverse contexts.
     </p>
-
-    <h3>What We Do</h3>
-    <ul>
-      <li><strong>Satellite Systems Engineering:</strong> We design, test, and deploy CubeSats and microsatellites 
-        for scientific, commercial, and educational missions. Our work includes structural integration, 
-        thermal diagnostics, and deorbiting mechanisms for low Earth orbit platforms.</li>
-      <li><strong>Climate & Environmental Intelligence:</strong> We apply remote sensing and GIS to assess 
-        coastal vulnerability, urban heat islands, and flood risks. Our models have informed climate 
-        adaptation strategies across West Africa and beyond.</li>
-      <li><strong>Planetary Health & Data Science:</strong> We integrate AI, geospatial analytics, and 
-        epidemiological modeling to forecast disease outbreaks, assess air quality impacts, and guide 
-        climate-smart public health systems.</li>
-    </ul>
-
-    <h3>Our Research Impact</h3>
     <p>
-      Our team has contributed extensively to the global body of knowledge through peer-reviewed 
-      publications, technical reports, and collaborative research. These works span:
+      We work at the intersection of aerospace engineering, data science, and public health, delivering solutions that are scientifically rigorous and socially impactful. Our mission is to empower stakeholders with innovative, data-driven tools that leverage satellite systems and space-based analytics for sustainable development, climate adaptation, and planetary health.
     </p>
-    <ul>
-      <li>Satellite mission design and qualification, including CubeSat platforms and microsatellite bus systems.</li>
-      <li>Geospatial modeling for climate risk assessment, with applications in agriculture, urban planning, 
-        and disaster management.</li>
-      <li>Environmental health analytics, focusing on the intersection of climate change, air quality, 
-        and infectious disease dynamics.</li>
-      <li>AI-driven decision support tools, integrating Earth observation data with public health and 
-        environmental metrics.</li>
-    </ul>
     <p>
-      These publications have been featured in leading scientific journals and presented at international 
-      conferences, reflecting our commitment to rigorous, impactful, and ethically grounded research.
+      <strong>What We Do</strong><br />
+      <em>Satellite Systems Engineering:</em> We design, test, and deploy CubeSats and microsatellites for scientific, commercial, and educational missions. Our capabilities include structural integration, thermal diagnostics, and deorbiting mechanisms for low Earth orbit platforms.<br /><br />
+      <em>Climate & Environmental Intelligence:</em> We apply remote sensing and GIS to assess coastal vulnerability, urban heat islands, and flood risks. Our models have informed climate adaptation strategies across West Africa and beyond.<br /><br />
+      <em>Planetary Health & Data Science:</em> We integrate AI, geospatial analytics, and epidemiological modeling to forecast disease outbreaks, assess air quality impacts, and guide climate-smart public health systems.
     </p>
-
-    <h3>Global Reach</h3>
     <p>
-      With experience spanning Africa, Asia, and North America, we collaborate with universities, 
-      space agencies, and public health institutions to deliver solutions that are scientifically 
-      rigorous and socially impactful.
+      <strong>Our Research Impact</strong><br />
+      Nexus Space Ltd contributes extensively to the global body of knowledge through peer-reviewed publications, technical reports, and collaborative research. Our work spans satellite mission design, climate risk modeling, environmental health analytics, and AI-driven decision support tools. These contributions have been featured in leading scientific journals and presented at international conferences.
     </p>
+    <p>
+      <strong>Global Reach</strong><br />
+      With experience spanning Africa, Asia, and North America, we collaborate with universities, space agencies, and public health institutions to deliver solutions that are locally relevant and globally scalable. We support national space programs, incubate startups, and co-develop open-source platforms tailored to regional needs.
+    </p>
+    <p>
+      <strong>Why Nexus Space Ltd?</strong><br />
+      Because we don’t just build satellites—we build capacity, resilience, and partnerships. We’re not just observers of the space renaissance unfolding across Africa and the Global South; we’re co-authors of its next chapter. Whether you're launching a CubeSat, designing a climate-smart health system, or seeking strategic alignment with emerging space-sector priorities, Nexus Space Ltd is your natural partner for execution and impact.
+    </p>
+  </div>
+</section>
   </section>
 
-  <!-- Services -->
-  <section id="services" class="services">
-    <h2>Our Services</h2>
-    <ul>
-      <li>🌍 Space Systems Engineering & Consulting</li>
-      <li>🛰️ Satellite Development & Integration</li>
-      <li>🚀 Research & Innovation in Space Applications</li>
-      <li>📡 Ground Infrastructure & Data Solutions</li>
-    </ul>
+  <!-- Our Services Section -->
+  <!-- Our Services Section -->
+<section id="services" class="services-section">
+  <div class="stars"></div>
+  <div class="container">
+    <h2 style="font-family: 'Montserrat', sans-serif; font-size: 32px;">Our Services</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="icon">🛰️</div>
+        <div class="service-title">Satellite Mission Design</div>
+        <div class="service-desc">From CubeSats to microsat constellations, we support end-to-end system engineering, payload integration, and orbital deployment.</div>
+      </div>
+      <div class="service-card">
+        <div class="icon">🌍</div>
+        <div class="service-title">Climate & Environmental Intelligence</div>
+        <div class="service-desc">Transforming satellite data into actionable insights for cities, coasts, and health systems worldwide.</div>
+      </div>
+      <div class="service-card">
+        <div class="icon">🧠</div>
+        <div class="service-title">Planetary Health Analytics</div>
+        <div class="service-desc">Harnessing AI and remote sensing to strengthen epidemiology, air quality monitoring, and global resilience.</div>
+      </div>
+      <div class="service-card">
+        <div class="icon">🤝</div>
+        <div class="service-title">Capacity Building & Consulting</div>
+        <div class="service-desc">Supporting agencies, startups, and institutions with training, policy alignment, and program execution.</div>
+      </div>
+    </div>
+    <button class="cta-button" onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })">Let’s Build Your Mission</button>
+  </div>
+</section>
+
+  <!-- Careers Section -->
+  <section id="careers">
+    <div class="container">
+      <h2>Careers</h2>
+      <p>
+        Join a team that’s shaping the future of space technology. We’re looking for engineers, data scientists, and policy experts who are passionate about planetary health and innovation.
+      </p>
+    </div>
   </section>
 
-  <!-- Contact -->
-  <section id="contact" class="contact">
+  <!-- Leadership Section -->
+  <section id="leadership">
+    <div class="container leadership-section">
+      <h2> Our Leadership</h2>
+      <div class="leadership-content">
+        <div class="leader-image">
+          <img src="Ibukun_Adebolu.jpg" alt="Dr. Ibukun Adebolu" />
+          <p class="caption">
+            Dr. Adebolu during satellite testing at Axelspace, Tokyo.
+          </p>
+        </div>
+        <div class="leader-text">
+          <p>
+            Dr. Adebolu is a pioneering aerospace engineer with a proven track record in satellite hardware development. His work spans international collaborations like the <em>BIRDS Project</em>, where he led structural design and qualification testing for CubeSats deployed from the ISS.
+          </p>
+          <p>
+            He also contributed to <em>SPATIUM I</em>, a precision timing satellite mission for ionospheric mapping. With publications in spacecraft systems engineering and a passion for indigenous capacity building, Dr. Adebolu is shaping the future of space technology in emerging markets.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" style="background-color: #F5F5F5; padding: 80px 0;">
+  <div class="container">
     <h2>Contact Us</h2>
-    <p>Email: info@nxspaceng.com</p>
-    <p>Phone: +2348068931199</p>
-    <p>Location: Akure, Nigeria</p>
-  </section>
+    <form id="contactForm" class="contact-form">
+      <div class="form-group">
+        <label for="firstName">First Name *</label>
+        <input type="text" id="firstName" name="firstName" required />
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">Last Name *</label>
+        <input type="text" id="lastName" name="lastName" required />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address *</label>
+        <input type="email" id="email" name="email" required />
+      </div>
+
+      <div class="form-group">
+        <label for="country">Country *</label>
+        <select id="country" name="country" required>
+          <option value="">Select Country</option>
+          <option value="Nigeria">Nigeria</option>
+          <option value="South Africa">South Africa</option>
+          <option value="Kenya">Kenya</option>
+          <option value="Ghana">Ghana</option>
+          <option value="Egypt">Egypt</option>
+          <option value="Morocco">Morocco</option>
+          <option value="Ethiopia">Ethiopia</option>
+          <option value="Uganda">Uganda</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="department">Please Route Question *</label>
+        <select id="department" name="department" required>
+          <option value="">Select Department</option>
+          <option value="Sales">Sales</option>
+          <option value="Support">Support</option>
+          <option value="Repairs">Repairs</option>
+          <option value="General Inquiry">General Inquiry</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="comment">Your Message *</label>
+        <textarea id="comment" name="comment" required></textarea>
+      </div>
+
+      <div class="form-group captcha">
+  <input type="checkbox" id="captcha" required />
+  <label for="captcha">I'm not a robot</label>
+</div>
+
+      <button type="submit" class="submit-btn">Send Message</button>
+    </form>
+
+    <p class="form-disclaimer">
+      By submitting this form, you agree to share your contact information with Nexus Space Ltd. We use this data solely to respond to your inquiry and share relevant updates. You can opt out at any time.
+    </p>
+  </div>
+</section>
 
   <!-- Footer -->
   <footer>
-    <p>© 2025 Nexus Space Ltd. All rights reserved.</p>
+    <p>&copy; 2025 Nexus Space Ltd. All rights reserved.</p>
   </footer>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
 </body>
 </html>
