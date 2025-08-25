@@ -2,7 +2,7 @@
 window.addEventListener("DOMContentLoaded", () => {
   const images = [
     'yellowknife_night.png',
-    'nebula.png',
+    'Nebula.png',
     'Earth_night.png',
     'mars-closeup.png'
   ];
