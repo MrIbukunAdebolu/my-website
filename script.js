@@ -3,7 +3,7 @@ window.addEventListener("DOMContentLoaded", () => {
   const images = [
     'yellowknife_night.png',
     'nebula.png',
-    'earth_night.png',
+    'Earth_night.png',
     'mars-closeup.png'
   ];
 
