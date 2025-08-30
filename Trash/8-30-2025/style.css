@@ -215,17 +215,6 @@ section p {
 }
 
 /* ──────────────── LEADERSHIP SECTION ──────────────── */
-/* Leadership Section Styles */
-#leadership .container {
-  padding: 40px 20px;
-}
-
-#leadership h2 {
-  font-size: 2em;
-  margin-bottom: 30px;
-  text-align: center;
-}
-
 .leadership-section {
   margin-top: 20px;
 }
@@ -237,29 +226,16 @@ section p {
   align-items: flex-start;
 }
 
-/* Leader Card Layout */
-.leader-image,
-.leader-text {
-  min-width: 280px;
-}
-
 .leader-image {
   flex: 1;
+  min-width: 280px;
   text-align: center;
 }
 
-.leader-text {
-  flex: 2;
-}
-
-/* Leader Photo Styling */
-.leader-image img,
-.leader-card img {
-  width: 100%;
+.leader-image img {
   max-width: 300px;
-  max-height: 300px;
+  width: 100%;
   border-radius: 12px;
-  object-fit: cover;
   transition: transform 0.4s ease;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
@@ -268,11 +244,15 @@ section p {
   transform: scale(1.05);
 }
 
-/* Caption Text */
 .caption {
   font-size: 0.95rem;
   color: #555;
   margin-top: 10px;
+}
+
+.leader-text {
+  flex: 2;
+  min-width: 280px;
 }
 
 /* ──────────────── SERVICES SECTION ──────────────── */

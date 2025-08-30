@@ -1,4 +1,3 @@
-//console.log("Script loaded");
 window.addEventListener("DOMContentLoaded", () => {
   // Hero background slideshow
   const images = [
@@ -14,7 +13,7 @@ window.addEventListener("DOMContentLoaded", () => {
   // Preload images
   images.forEach(src => {
     const img = new Image();
-    img.src = `images/${src}`; // Adjust path if needed
+    img.src = `images/${src}`;
   });
 
   // Set initial background
@@ -38,6 +37,29 @@ window.addEventListener("DOMContentLoaded", () => {
   }, { threshold: 0.1 });
 
   cards.forEach(card => observer.observe(card));
+
+  // Animate metric cards on scroll
+  const metricCards = document.querySelectorAll('.metric-card');
+  metricCards.forEach(card => observer.observe(card));
+
+  // Animate hero text on load
+  const heroText = document.querySelector('.hero-text');
+  if (heroText) {
+    heroText.classList.add('fade-in');
+  }
+
+  // Auto-scroll partner logos (optional enhancement)
+  const logoStrip = document.querySelector('.partner-logos');
+  if (logoStrip) {
+    let scrollAmount = 0;
+    setInterval(() => {
+      scrollAmount += 1;
+      logoStrip.scrollLeft = scrollAmount;
+      if (scrollAmount >= logoStrip.scrollWidth - logoStrip.clientWidth) {
+        scrollAmount = 0;
+      }
+    }, 50);
+  }
 
   // Contact form handler
   document.getElementById('contactForm').addEventListener('submit', function (e) {
@@ -63,6 +85,7 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
 // Smooth scroll for nav links
 document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
   anchor.addEventListener("click", function (e) {
@@ -71,7 +94,6 @@ document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
     if (target) {
       target.scrollIntoView({ behavior: "smooth" });
     }
-    // Close mobile menu after click
     const navMenu = document.getElementById("nav-menu");
     const hamburger = document.getElementById("hamburger");
     if (navMenu && hamburger) {
