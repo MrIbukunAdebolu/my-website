@@ -11,6 +11,27 @@ body {
   overflow-x: hidden;
 }
 
+:root {
+  --primary-color: #002b5b;
+  --accent-color: #00a86b;
+  --background-light: #f5f8fa;
+  --font-main: 'Open Sans', sans-serif;
+  --font-heading: 'Montserrat', sans-serif;
+}
+
+/* ──────────────── GLOBAL STYLES ──────────────── */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-main);
+  background-color: var(--background-light);
+  color: var(--primary-color);
+  overflow-x: hidden;
+}
+
 /* ──────────────── HEADER & NAVIGATION ──────────────── */
 header {
   position: fixed;
@@ -31,12 +52,11 @@ header {
   margin: 0 auto;
 }
 
-/* Logo */
 .logo {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 1.2rem;
   font-weight: 700;
-  color: #002b5b;
+  color: var(--primary-color);
   text-decoration: none;
 }
 
@@ -53,7 +73,7 @@ header {
 .hamburger span {
   display: block;
   height: 3px;
-  background-color: #002b5b;
+  background-color: var(--primary-color);
   border-radius: 2px;
   transition: all 0.3s ease;
 }
@@ -77,17 +97,67 @@ header {
 
 .nav-menu a {
   text-decoration: none;
-  color: #002b5b;
+  color: var(--primary-color);
   font-weight: 600;
   padding: 8px 12px;
   transition: color 0.3s ease;
+  white-space: nowrap;
 }
 
 .nav-menu a:hover {
-  color: #00a86b;
+  color: var(--accent-color);
 }
 
-/* Mobile Styles */
+/* ──────────────── HERO SECTION ──────────────── */
+.hero {
+  width: 100vw;
+  height: 100vh;
+  background-image: url('images/Earth_night.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  overflow: hidden;
+}
+
+.overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 43, 91, 0.35);
+  z-index: 1;
+}
+
+.hero-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-text {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  color: #fff;
+  padding: 0 20px;
+}
+
+.hero-text h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 6vw, 4rem);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.hero-text p {
+  margin-top: 12px;
+  font-size: clamp(1rem, 3.5vw, 1.5rem);
+  line-height: 1.4;
+}
+
+/* ──────────────── MOBILE STYLES ──────────────── */
 @media screen and (max-width: 768px) {
   .hamburger {
     display: flex;
@@ -115,11 +185,12 @@ header {
     padding: 12px 20px;
     border-bottom: 1px solid #444;
     text-align: left;
+    white-space: normal;
   }
 
   .nav-menu a:hover {
     background-color: #111;
-    color: #00a86b;
+    color: var(--accent-color);
   }
 }
 
@@ -128,64 +199,6 @@ header {
   from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
-/* ──────────────── HERO SECTION ──────────────── */
-.hero {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  background-image: url('images/Earth_night.png'); /* ✅ default image */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  transition: background-image 1s ease-in-out;
-  overflow: hidden;
-  text-align: center;
-  padding: 0 20px;
-}
-
-
-.overlay {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0, 43, 91, 0.35);
-  z-index: 1;
-}
-
-.hero-text {
-  position: relative;
-  z-index: 2;
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-
-  width: 100%;        /* ensures full width for centering */
-  max-width: 900px;   /* keeps text from being too wide on desktops */
-  margin: 0 auto;     /* centers container */
-  padding: 0 20px;    /* safe spacing on small screens */
-}
-
-.hero-text h1 {
-  font-family: 'Montserrat', sans-serif;
-  margin: 0;
-  line-height: 1.2;
-  font-size: clamp(2rem, 6vw, 4rem);
-  text-align: center; /* enforce centering */
-}
-
-.hero-text p {
-  margin-top: 12px;
-  font-size: clamp(1rem, 3.5vw, 1.5rem);
-  line-height: 1.4;
-  text-align: center; /* enforce centering */
-}
-
 
 
 /* ──────────────── SECTION STYLING ──────────────── */
