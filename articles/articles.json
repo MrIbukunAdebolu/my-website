@@ -6,12 +6,17 @@
     "file": "articles/MappingAfricasEOValueStream.md"
   },
 
-
-
   {
     "title": "The Stars Just Called Nigeria: A Civilian Space Seat Is Up for Grabs",
     "date": "2025-11-10",
     "summary": "How SERA is democratizing human space flight in Nigeria",
     "file": "articles/sera-nigeria-space-mission.md"
+  },
+
+  {
+   "title": "Nexus Space Ltd: 2026 Strategic Focus",
+    "date": "2025-11-10",
+    "summary": "“Nexus Space Ltd unveils its 2026 Strategic Priorities — a bold roadmap advancing Africa’s climate resilience, satellite engineering capability, and space-driven innovation through high-impact programs and partnerships.”",
+    "file": "articles/2026StrategicOutlook.md" 
   }
 ]
