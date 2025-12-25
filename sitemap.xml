@@ -16,4 +16,22 @@
     <priority>0.8</priority>
   </url>
 
+  <url>
+    <loc>https://nxspaceng.com/blog.html?post=MappingAfricasEOValueStream.md</loc>
+    <lastmod>2025-09-01</lastmod>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://nxspaceng.com/blog.html?post=sera-nigeria-space-mission.md</loc>
+    <lastmod>2025-11-10</lastmod>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://nxspaceng.com/blog.html?post=2026StrategicOutlook.md</loc>
+    <lastmod>2025-11-10</lastmod>
+    <priority>0.6</priority>
+  </url>
+
 </urlset>
