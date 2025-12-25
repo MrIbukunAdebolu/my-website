@@ -3,14 +3,29 @@ let posts = [];
 
 // ──────────────── FETCH ARTICLES INDEX ────────────────
 function loadArticles() {
-  fetch("articles/articles.json")
+  fetch("articles.json") // Ensure this path matches your file structure
     .then(response => {
       if (!response.ok) throw new Error("Failed to load articles index");
       return response.json();
     })
     .then(data => {
       posts = data;
-      renderPostList();
+      
+      // NEW: Check for a direct link in the URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const postFile = urlParams.get('post');
+
+      if (postFile) {
+        // Find the index of the post that matches the filename in the URL
+        const postIndex = posts.findIndex(p => p.file.includes(postFile));
+        if (postIndex !== -1) {
+          renderPost(postIndex);
+        } else {
+          renderPostList();
+        }
+      } else {
+        renderPostList();
+      }
     })
     .catch(error => {
       document.getElementById("post-list").innerHTML = `<p>Error loading articles: ${error.message}</p>`;
@@ -20,6 +35,11 @@ function loadArticles() {
 // ──────────────── RENDER POST LIST ────────────────
 function renderPostList() {
   const postList = document.getElementById("post-list");
+  const contentDiv = document.getElementById("content");
+  
+  // Reset visibility
+  postList.style.display = "flex";
+  contentDiv.innerHTML = "";
   postList.innerHTML = "";
 
   posts.forEach((post, index) => {
@@ -51,11 +71,16 @@ function renderPost(index) {
     })
     .then(markdown => {
       contentDiv.innerHTML = `
-        <h1>${post.title}</h1>
-        <p class="post-meta">${new Date(post.date).toDateString()}</p>
-        <div class="post-body">${marked.parse(markdown)}</div>
-        <button onclick="goBack()">← Back to Articles</button>
+        <article class="full-post">
+          <h1>${post.title}</h1>
+          <p class="post-meta">${new Date(post.date).toDateString()}</p>
+          <div class="post-body">${marked.parse(markdown)}</div>
+          <button onclick="goBack()" class="back-btn">← Back to Articles</button>
+        </article>
       `;
+      // Optional: Update URL without reloading so 'Back' works better
+      const newUrl = window.location.pathname + `?post=${post.file.split('/').pop()}`;
+      window.history.pushState({path:newUrl}, '', newUrl);
     })
     .catch(error => {
       contentDiv.innerHTML = `<p>Error loading post: ${error.message}</p>`;
@@ -64,8 +89,11 @@ function renderPost(index) {
 
 // ──────────────── GO BACK TO LIST ────────────────
 function goBack() {
-  document.getElementById("content").innerHTML = "";
-  document.getElementById("post-list").style.display = "flex";
+  // Clear the URL parameter when going back
+  const cleanUrl = window.location.pathname;
+  window.history.pushState({path:cleanUrl}, '', cleanUrl);
+  
+  renderPostList();
 }
 
 // ──────────────── INIT ────────────────
