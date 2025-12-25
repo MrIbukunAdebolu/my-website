@@ -3,7 +3,8 @@ let posts = [];
 
 // ──────────────── FETCH ARTICLES INDEX ────────────────
 function loadArticles() {
-  fetch("articles.json") // Ensure this path matches your file structure
+  // Pointing to the "articles" folder in the root directory
+  fetch("articles/articles.json") 
     .then(response => {
       if (!response.ok) throw new Error("Failed to load articles index");
       return response.json();
@@ -11,12 +12,12 @@ function loadArticles() {
     .then(data => {
       posts = data;
       
-      // NEW: Check for a direct link in the URL
+      // Check for a direct link in the URL (e.g., blog.html?post=filename.md)
       const urlParams = new URLSearchParams(window.location.search);
       const postFile = urlParams.get('post');
 
       if (postFile) {
-        // Find the index of the post that matches the filename in the URL
+        // Find the post where the 'file' path contains the requested filename
         const postIndex = posts.findIndex(p => p.file.includes(postFile));
         if (postIndex !== -1) {
           renderPost(postIndex);
@@ -28,7 +29,7 @@ function loadArticles() {
       }
     })
     .catch(error => {
-      document.getElementById("post-list").innerHTML = `<p>Error loading articles: ${error.message}</p>`;
+      document.getElementById("post-list").innerHTML = `<p>Error: ${error.message}</p>`;
     });
 }
 
@@ -37,7 +38,6 @@ function renderPostList() {
   const postList = document.getElementById("post-list");
   const contentDiv = document.getElementById("content");
   
-  // Reset visibility
   postList.style.display = "flex";
   contentDiv.innerHTML = "";
   postList.innerHTML = "";
@@ -49,7 +49,7 @@ function renderPostList() {
       <h2>${post.title}</h2>
       <p class="post-meta">${new Date(post.date).toDateString()}</p>
       <p>${post.summary}</p>
-      <button onclick="renderPost(${index})">Read More</button>
+      <button class="btn primary" onclick="renderPost(${index})">Read More</button>
     `;
     postList.appendChild(li);
   });
@@ -64,9 +64,10 @@ function renderPost(index) {
   postList.style.display = "none";
   contentDiv.innerHTML = `<p>Loading...</p>`;
 
+  // Your articles.json already has "articles/" in the file path
   fetch(post.file)
     .then(response => {
-      if (!response.ok) throw new Error("Failed to load post");
+      if (!response.ok) throw new Error("Could not find the article file");
       return response.text();
     })
     .then(markdown => {
@@ -75,26 +76,21 @@ function renderPost(index) {
           <h1>${post.title}</h1>
           <p class="post-meta">${new Date(post.date).toDateString()}</p>
           <div class="post-body">${marked.parse(markdown)}</div>
-          <button onclick="goBack()" class="back-btn">← Back to Articles</button>
+          <button class="btn secondary" onclick="goBack()" style="margin-top:20px;">← Back to Articles</button>
         </article>
       `;
-      // Optional: Update URL without reloading so 'Back' works better
-      const newUrl = window.location.pathname + `?post=${post.file.split('/').pop()}`;
-      window.history.pushState({path:newUrl}, '', newUrl);
+      // Updates address bar to show the specific post link
+      const fileName = post.file.split('/').pop();
+      window.history.pushState({}, '', `?post=${fileName}`);
     })
     .catch(error => {
-      contentDiv.innerHTML = `<p>Error loading post: ${error.message}</p>`;
+      contentDiv.innerHTML = `<p>Error: ${error.message}</p>`;
     });
 }
 
-// ──────────────── GO BACK TO LIST ────────────────
 function goBack() {
-  // Clear the URL parameter when going back
-  const cleanUrl = window.location.pathname;
-  window.history.pushState({path:cleanUrl}, '', cleanUrl);
-  
+  window.history.pushState({}, '', window.location.pathname);
   renderPostList();
 }
 
-// ──────────────── INIT ────────────────
 document.addEventListener("DOMContentLoaded", loadArticles);
