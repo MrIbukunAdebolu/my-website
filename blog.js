@@ -3,8 +3,8 @@ let posts = [];
 
 // ──────────────── FETCH ARTICLES INDEX ────────────────
 function loadArticles() {
-  // Pointing to the "articles" folder in the root directory
-  fetch("articles/articles.json") 
+  // Path updated to fetch from the "articles" subfolder
+  fetch("articles/articles.json")
     .then(response => {
       if (!response.ok) throw new Error("Failed to load articles index");
       return response.json();
@@ -12,12 +12,12 @@ function loadArticles() {
     .then(data => {
       posts = data;
       
-      // Check for a direct link in the URL (e.g., blog.html?post=filename.md)
+      // Check for a direct link (e.g., blog.html?post=filename.md)
       const urlParams = new URLSearchParams(window.location.search);
       const postFile = urlParams.get('post');
 
       if (postFile) {
-        // Find the post where the 'file' path contains the requested filename
+        // Match the filename from the URL to the file path in the JSON
         const postIndex = posts.findIndex(p => p.file.includes(postFile));
         if (postIndex !== -1) {
           renderPost(postIndex);
@@ -64,7 +64,7 @@ function renderPost(index) {
   postList.style.display = "none";
   contentDiv.innerHTML = `<p>Loading...</p>`;
 
-  // Your articles.json already has "articles/" in the file path
+  // Fetches the markdown file using the path from articles.json
   fetch(post.file)
     .then(response => {
       if (!response.ok) throw new Error("Could not find the article file");
@@ -79,7 +79,7 @@ function renderPost(index) {
           <button class="btn secondary" onclick="goBack()" style="margin-top:20px;">← Back to Articles</button>
         </article>
       `;
-      // Updates address bar to show the specific post link
+      // Update browser address bar without reloading
       const fileName = post.file.split('/').pop();
       window.history.pushState({}, '', `?post=${fileName}`);
     })
