@@ -53,4 +53,8 @@ We are seeking a **Junior Media Strategist** to support our digital growth initi
 * **Incentives:** Outcome-based incentives tied directly to campaign performance.
 * **Growth:** Opportunity to build a strong portfolio and gain exposure in a global, tech-driven organization.
 
+
+### How to Apply
+
+Send an email to info@nxspaceng.com
 ---
