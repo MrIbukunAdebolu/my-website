@@ -2,9 +2,22 @@
 <html lang="en">
 <head>
 
-  <!-- Self-contained Navigation + Layout Styles (placed FIRST to avoid corruption) -->
+  <!-- Self-contained Brand Styles (placed FIRST to avoid corruption) -->
   <style>
-    /* Root wrapper to prevent layout escape */
+    :root {
+      --brand-blue: #0057b8;
+      --font-size-base: 16px;
+      --font-family: 'Open Sans', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-family);
+      font-size: var(--font-size-base);
+      background-color: #fff;
+      color: #000;
+    }
+
     #page-root {
       display: block;
       width: 100%;
@@ -12,13 +25,14 @@
       z-index: 1;
     }
 
-    /* Header fix: force visibility */
+    /* Header */
     header {
-      background-color: #000 !important;
-      color: #fff !important;
+      background-color: #fff;
+      color: var(--brand-blue);
       position: relative;
       z-index: 2000;
       width: 100%;
+      border-bottom: 1px solid #eee;
     }
 
     .nav-container {
@@ -29,7 +43,7 @@
     }
 
     .logo {
-      color: #fff !important;
+      color: var(--brand-blue);
       font-size: 1.4rem;
       text-decoration: none;
       font-weight: bold;
@@ -47,7 +61,7 @@
     .hamburger span {
       width: 25px;
       height: 3px;
-      background-color: #fff;
+      background-color: var(--brand-blue);
       border-radius: 2px;
     }
 
@@ -63,10 +77,10 @@
         position: absolute;
         top: 60px;
         right: 20px;
-        background-color: #222;
+        background-color: #fff;
         padding: 15px;
         border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         z-index: 2500;
       }
 
@@ -75,9 +89,9 @@
       }
 
       .nav-menu a {
-        color: #fff !important;
+        color: var(--brand-blue);
         padding: 12px 20px;
-        border-bottom: 1px solid #444;
+        border-bottom: 1px solid #eee;
         text-decoration: none;
       }
 
@@ -99,60 +113,60 @@
       }
 
       .nav-menu a {
-        color: #fff !important;
+        color: var(--brand-blue);
         text-decoration: none;
         padding: 10px;
         font-weight: 500;
       }
 
       .nav-menu a:hover {
-        color: #00bcd4;
+        text-decoration: underline;
       }
     }
 
     /* Blog Grid */
     #post-list {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      grid-template-columns: repeat(4, 1fr);
       gap: 30px;
-      margin-top: 40px;
+      margin: 40px 20px 0;
       padding: 0;
       list-style: none;
     }
 
     .post-preview {
-      background: #111;
+      background: #f9f9f9;
       padding: 20px;
       border-radius: 10px;
-      color: #fff;
-      border: 1px solid #333;
+      color: #000;
+      border: 1px solid #ddd;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 260px;
     }
 
     .post-preview h2 {
       margin-top: 0;
+      font-size: 1.2rem;
+      color: var(--brand-blue);
     }
 
     .post-meta {
       font-size: 0.9rem;
-      opacity: 0.7;
+      opacity: 0.6;
+      margin-bottom: 10px;
     }
 
-    .btn {
-      margin-top: 10px;
-      padding: 10px 16px;
-      border-radius: 6px;
-      cursor: pointer;
-      border: none;
+    .read-more {
+      margin-top: auto;
+      color: var(--brand-blue);
+      text-decoration: none;
+      font-weight: 500;
     }
 
-    .btn.primary {
-      background: #00bcd4;
-      color: #000;
-    }
-
-    .btn.secondary {
-      background: #333;
-      color: #fff;
+    .read-more:hover {
+      text-decoration: underline;
     }
 
     /* Footer */
@@ -165,9 +179,8 @@
 
     .footer-container {
       display: flex;
-      justify-content: flex-start;
-      flex-wrap: wrap;
-      gap: 30px;
+      justify-content: center;
+      text-align: center;
     }
 
     .footer-left h3 {
@@ -216,14 +229,23 @@
 
   <!-- Blog Content -->
   <section class="container">
-    <h1>Latest Articles</h1>
+    <h1 style="margin-left: 20px; color: var(--brand-blue);">Latest Articles</h1>
     <ul id="post-list"></ul>
     <div id="content"></div>
   </section>
 
   <!-- Footer -->
   <footer>
-    <p>&copy; 2026 Nexus Space Ltd. All rights reserved.</p>
+    <div class="footer-container">
+      <div class="footer-left">
+        <h3>Nexus Space Ltd</h3>
+        <p>Empowering Africa’s next generation of space and climate innovators.</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2025 Nexus Space Ltd. All rights reserved.</p>
+    </div>
   </footer>
 
 </div>
