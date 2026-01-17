@@ -36,9 +36,11 @@
       <a href="index.html">Home</a>
       <a href="#about">About Us</a>
       <a href="#services">Our Services</a>
-      <a href="#careers">Careers</a>
+      <a href="career.html">Careers</a>
       <a href="#leadership">Leadership</a>
-      <a href="#impact">Impact</a>
+      <a href="blog.html">Blog</a>
+      <a href="microgrant.html">Microgrant</a>
+      <a href="events.html">Events</a>
       <a href="#contact">Contact Us</a>
     </nav>
   </div>
@@ -54,10 +56,10 @@
       <p></p>
       <p></p>
       <p>Join our community of innovators applying space science for climate resilience and social impact across Africa. Together, we advance planetary health, early warning, and smart agriculture.</p>
-    <div class="cta-buttons">
-        <a href="#contact" class="btn primary">Let’s Partner for Africa’s Future</a>
-        <a href="#metrics" class="btn secondary">See Our Impact</a>
-      </div>
+   <div class="cta-buttons">
+    <a href="#contact" class="btn primary">Let’s Partner for Africa’s Future</a>
+    <a href="outlook.html" class="btn secondary">See 2026 Outlook</a>
+</div>
     </div>
   </div>
 </section>
@@ -107,11 +109,18 @@
           <div class="icon">🛰️</div>
           <div class="service-title">Satellite Mission Design</div>
           <div class="service-desc">From CubeSats to microsat constellations, we support end-to-end system engineering, payload integration, and orbital deployment.</div>
+          <div class="service-card">
+
+</div>
         </div>
         <div class="service-card">
           <div class="icon">🌍</div>
-          <div class="service-title">Climate & Environmental Intelligence</div>
-          <div class="service-desc">Transforming satellite data into actionable insights for cities, coasts, and health systems worldwide.</div>
+            
+  <div class="service-title">Climate & Environmental Intelligence</div>
+  <div class="service-desc">Transforming satellite data into actionable insights for cities and health systems.</div>
+  <a href="blog.html?post=MappingAfricasEOValueStream.md" style="font-size: 0.8rem; color: var(--accent-color); font-weight: bold; text-decoration: none;">
+    READ AI RESEARCH: Mapping Africa's EO Value Stream →
+  </a>
         </div>
         <div class="service-card">
           <div class="icon">🧠</div>
@@ -128,15 +137,15 @@
     </div>
   </section>
 
-  <!-- Careers Section -->
   <section id="careers">
-    <div class="container">
-      <h2>Careers</h2>
-      <p>
-        Join a team that’s shaping the future of space technology. We’re looking for engineers, data scientists, and policy experts who are passionate about planetary health and innovation.
-      </p>
-    </div>
-  </section>
+  <div class="container">
+    <h2>Careers</h2>
+    <p>
+      Join a team that’s shaping the future of space technology. We’re looking for engineers, data scientists, and policy experts who are passionate about planetary health and innovation.
+    </p>
+    <a href="career.html" class="btn primary">Explore Open Positions</a>
+  </div>
+</section>
 
   <!-- Leadership Section -->
   <!-- Leadership Section -->

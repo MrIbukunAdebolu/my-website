@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nexus Microgrant Programme</title>
+
+  <!-- Correct Google Fonts (matching homepage weights) -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Montserrat:wght@700&display=swap" rel="stylesheet" />
+
+  <!-- Main Site Styles -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Google Tag -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PV6C235WVG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PV6C235WVG');
+  </script>
+
+  <style>
+    /* Fix nav layout */
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Fix nav menu appearance */
+    .nav-menu {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-menu a {
+      text-decoration: none;
+      color: var(--primary-color);
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 8px 12px;
+      white-space: nowrap;
+    }
+
+    /* Fix logo styling */
+    .logo {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+
+    /* MICROGRANT PAGE-SPECIFIC STYLES */
+
+    .microgrant-hero {
+  width: 100%;
+  height: 380px;
+  background-image: url('../images/mars-closeup.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+}
+    
+
+    .microgrant-hero-overlay {
+      background: rgba(0, 43, 91, 0.55);
+      padding: 40px 20px;
+      border-radius: 8px;
+    }
+
+    .microgrant-hero h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.8rem;
+      margin: 0;
+    }
+
+    .microgrant-hero p {
+      margin-top: 12px;
+      font-size: 1.2rem;
+      font-weight: 300;
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    /* Restore homepage section padding */
+    .microgrant-content {
+      padding: 80px 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    .microgrant-content p,
+    .microgrant-content li {
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 400;
+    }
+
+    .apply-container {
+      text-align: center;
+      margin: 10px 0 20px 0;
+    }
+
+    .apply-btn {
+      display: inline-block;
+      background-color: #002b5b;
+      color: white;
+      padding: 14px 26px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.05rem;
+      transition: background 0.25s ease;
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    .apply-btn:hover {
+      background-color: #004080;
+    }
+
+    .faq-item {
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .faq-question {
+      font-weight: 700;
+      cursor: pointer;
+      color: #002b5b;
+      font-size: 1.1rem;
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    .faq-answer {
+      display: none;
+      margin-top: 10px;
+      font-size: 1rem;
+      color: #003366;
+      font-family: 'Open Sans', sans-serif;
+    }
+    footer {
+  background-color: #002b5b; /* Cosmos Blue */
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  font-family: 'Open Sans', sans-serif;
+  margin-top: 40px;
+}
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="logo">Nexus Space Ltd</a>
+
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <nav id="nav-menu" class="nav-menu">
+  <a href="../index.html">Home</a>
+  <a href="../index.html#about">About Us</a>
+  <a href="../index.html#services">Our Services</a>
+  <a href="../career.html">Careers</a>
+  <a href="../index.html#leadership">Leadership</a>
+  <a href="../blog.html">Blog</a>
+  <a href="microgrant.html">Microgrant</a>
+ 
+  <a href="../index.html#contact">Contact Us</a>
+</nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="microgrant-hero">
+    <div class="microgrant-hero-overlay">
+      <h1>Nexus Microgrant Programme</h1>
+      <p>Empowering early‑career space and geospatial talent across Africa</p>
+    </div>
+  </section>
+
+  <!-- APPLY BUTTON -->
+  <div class="apply-container">
+    <a href="mailto:info@nxspaceng.com?subject=Cohort%20A%20-%20Application%20for%20Nexus%20Microgrant" class="apply-btn">
+      Apply Now
+    </a>
+  </div>
+
+  <!-- CONTENT -->
+  <section class="microgrant-content">
+    <h2>About the Programme</h2>
+    <p>
+      The Nexus Microgrant Programme provides small, targeted financial support to early‑career individuals working in 
+      Earth observation, climate resilience, geospatial analysis, and space‑related fields. The goal is to remove modest 
+      financial barriers that prevent promising Africans from accessing opportunities, completing projects, or advancing 
+      their skills.
+    </p>
+
+    <h2>Why This Programme Exists</h2>
+    <p>
+      Across Africa, talented individuals frequently encounter financial constraints that limit their ability to participate 
+      in research, training, or professional development. These barriers are often small, but their impact is significant. 
+      This programme was created to address that gap through timely, mission‑aligned support.
+    </p>
+
+    <h2>Who Can Apply</h2>
+    <ul>
+      <li>Residents of Africa at the time of application</li>
+      <li>Students, early‑career professionals, or emerging researchers</li>
+      <li>Individuals working in Earth observation, climate resilience, geospatial analysis, environmental science, or space technology</li>
+      <li>Applicants with a clear, well‑defined activity requiring small financial support</li>
+    </ul>
+
+    <h2>What We Fund</h2>
+    <ul>
+      <li>Fieldwork and data collection</li>
+      <li>Conference attendance or presentation</li>
+      <li>Short courses, workshops, or training programmes</li>
+      <li>Prototype development or small technical projects</li>
+      <li>Community mapping or environmental monitoring</li>
+      <li>Research‑related travel or materials</li>
+    </ul>
+
+    <h2>Programme Cycles</h2>
+    <ul>
+      <li><strong>Cohort A:</strong> January – June</li>
+      <li><strong>Cohort B:</strong> July – December</li>
+    </ul>
+
+    <h2>How to Apply</h2>
+    <p>Applications are submitted by email.</p>
+    <ul>
+      <li><strong>Email:</strong> info@nxspaceng.com</li>
+      <li><strong>Subject line format:</strong></li>
+      <ul>
+        <li>Cohort A – Application for Nexus Microgrant – YYYY-MM-DD</li>
+        <li>Cohort B – Application for Nexus Microgrant – YYYY-MM-DD</li>
+      </ul>
+      <li>Attach: Proposal, Budget & Financial Need Statement, Endorsement Letter</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-item">
+      <div class="faq-question">Who is eligible to apply?</div>
+      <div class="faq-answer">Applicants must reside in Africa and work in fields aligned with the programme’s focus.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">Can I apply if I live outside Africa?</div>
+      <div class="faq-answer">No, applicants must reside in Africa at the time of application.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">Is an endorsement letter required?</div>
+      <div class="faq-answer">Yes, an endorsement letter is required for all applications.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">Can previous winners apply again?</div>
+      <div class="faq-answer">No, previous grantees and members of their project teams are not eligible to reapply.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">Can the funds be used for unrelated expenses?</div>
+      <div class="faq-answer">No, funds must be used for the activity described in the proposal.</div>
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Nexus Space Ltd. All rights reserved.</p>
+  </footer>
+
+  <!-- Main JS -->
+  <script src="script.js"></script>
+
+  <!-- Microgrant FAQ Toggle -->
+  <script>
+    document.querySelectorAll('.faq-question').forEach(q => {
+      q.addEventListener('click', () => {
+        const answer = q.nextElementSibling;
+        answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+      });
+    });
+  </script>
+
+</body>
+</html>

@@ -47,6 +47,7 @@ header {
 }
 
 .logo {
+  font-family: var(--font-heading);
   font-size: 1.2rem;
   font-weight: 700;
   color: var(--primary-color);
@@ -61,6 +62,7 @@ header {
 .nav-menu a {
   text-decoration: none;
   color: var(--primary-color);
+  font-family: var(--font-body);
   font-weight: 600;
   font-size: 1rem;
   padding: 8px 12px;
@@ -71,6 +73,7 @@ header {
   color: var(--accent-color);
 }
 
+/* Hamburger (mobile) */
 .hamburger {
   display: none;
   flex-direction: column;
@@ -95,49 +98,43 @@ header {
   overflow: hidden;
 }
 
+/* Slides container */
 .slides {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   z-index: 1;
 }
 
+/* Each slide */
 .slide {
   position: absolute;
-  inset: 0;
+  width: 100%;
+  height: 100%;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0;
   transition: opacity 1.2s ease-in-out;
   z-index: 2;
-  pointer-events: none; /* inactive slides never block clicks */
 }
 
 .slide.active {
   opacity: 1;
-  pointer-events: auto; /* only active slide receives clicks */
 }
 
-
-/* Dark overlay inside each slide */
+/* Per-slide dark overlay */
 .overlay {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background: rgba(0, 43, 91, 0.35);
-  pointer-events: none;
-  z-index: 1;
-}
-/* Smooth black preload background */
-.hero,
-.slides,
-.slide {
-  background-color: #000;
-}
-/* All slide content sits above overlays */
-.slide > *:not(.overlay) {
-  position: relative;
   z-index: 3;
-  pointer-events: auto;
+  pointer-events: none;
 }
 
 /* ─────────────────────────────────────────────── */
@@ -145,25 +142,28 @@ header {
 /* ─────────────────────────────────────────────── */
 
 .home-hero-overlay {
+  position: relative !important;
+  z-index: 9999 !important;
+  pointer-events: auto !important;
   background: rgba(0, 43, 91, 0.45);
   padding: 40px 20px;
   border-radius: 8px;
   color: white;
   text-align: center;
-  max-width: 1100px;
+  max-width: 800px;
   margin: 0 auto;
   top: 45%;
   transform: translateY(-45%);
+  font-family: var(--font-body);
 }
 
 .home-hero-overlay h1 {
-  font-size: clamp(1.8rem, 4.5vw, 3rem);
-  line-height: 1.15;
-  margin-bottom: 0.8rem;
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+  margin-bottom: 1rem;
   color: #fff;
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
 }
-
 
 .home-hero-overlay p {
   font-size: 1.2rem;
@@ -173,6 +173,7 @@ header {
   text-shadow: 0 1px 8px rgba(0, 0, 0, 0.35);
 }
 
+/* CTA Buttons */
 .cta-buttons {
   display: flex;
   justify-content: center;
@@ -185,7 +186,9 @@ header {
   border-radius: 40px;
   font-weight: 600;
   text-decoration: none;
+  font-family: var(--font-body);
   font-size: 1rem;
+  border: none;
   cursor: pointer;
 }
 
@@ -202,16 +205,26 @@ header {
 .btn:hover {
   opacity: 0.9;
 }
-
 /* ─────────────────────────────────────────────── */
-/* MICROGRANT SLIDE                                */
+/* MICROGRANT SLIDE — FIXED & CONTAINED            */
 /* ─────────────────────────────────────────────── */
 
 .microgrant-slide {
-  overflow: hidden; /* prevents overlay from escaping upward */
+  position: relative !important;
+  overflow: hidden !important; /* ← prevents overlay from spilling upward */
 }
 
 .microgrant-slide .slide-overlay {
+  position: relative !important; /* ← prevents full-screen expansion */
+  width: auto !important;
+  height: auto !important;
+  top: 45% !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: translateY(-45%) !important;
+  z-index: 21 !important;
+  pointer-events: auto !important;
   background: rgba(0, 43, 91, 0.55);
   padding: 40px 20px;
   border-radius: 8px;
@@ -219,8 +232,19 @@ header {
   text-align: center;
   max-width: 600px;
   margin: 0 auto;
-  top: 45%;
-  transform: translateY(-45%);
+  font-family: var(--font-body);
+}
+
+.microgrant-slide h2 {
+  font-family: var(--font-heading);
+  font-size: 2.4rem;
+  margin-bottom: 10px;
+}
+
+.microgrant-slide p {
+  font-size: 1.1rem;
+  font-weight: 300;
+  margin-bottom: 20px;
 }
 
 .slide-btn {
@@ -233,6 +257,7 @@ header {
   font-weight: 600;
   font-size: 1rem;
   transition: background 0.25s ease;
+  font-family: var(--font-body);
 }
 
 .slide-btn:hover {
@@ -250,6 +275,7 @@ section:not(.hero):not(.services-section) {
 }
 
 h2 {
+  font-family: var(--font-heading);
   font-size: 2rem;
   margin-bottom: 20px;
 }
@@ -282,6 +308,7 @@ section p {
   max-width: 1200px;
   margin: auto;
   text-align: center;
+  z-index: 1;
 }
 
 .services-grid {
@@ -327,12 +354,14 @@ section p {
   text-decoration: underline;
 }
 
+/* Tablet */
 @media (max-width: 1024px) {
   .services-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
+/* Mobile */
 @media (max-width: 600px) {
   .services-grid {
     grid-template-columns: 1fr;
@@ -382,6 +411,7 @@ section p {
 
 #contact h2 {
   text-align: center;
+  font-family: var(--font-heading);
   font-size: 2.2rem;
   margin-bottom: 40px;
   color: #002b5b;
@@ -418,6 +448,7 @@ section p {
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 1rem;
+  font-family: var(--font-body);
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -438,6 +469,7 @@ section p {
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
+  font-family: var(--font-body);
 }
 
 .submit-btn:hover {
@@ -459,6 +491,7 @@ footer {
   color: white;
   text-align: center;
   padding: 20px 0;
+  font-family: var(--font-body);
   margin-top: 40px;
 }
 
@@ -500,103 +533,29 @@ footer {
     color: var(--accent-color);
   }
 }
-/* ─────────────────────────────────────────────── */
-/* SLIDESHOW CONTROLS                              */
-/* ─────────────────────────────────────────────── */
-
-.slide-controls {
-  position: absolute;
-  top: 50%;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  transform: translateY(-50%);
-  padding: 0 20px;
-  z-index: 10;
-  pointer-events: none; /* container ignores clicks */
-}
-
-.slide-controls button {
-  pointer-events: auto; /* buttons accept clicks */
-  background: rgba(0, 0, 0, 0.45);
-  border: none;
-  color: white;
-  font-size: 2.5rem;
-  padding: 8px 16px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.25s ease;
-}
-
-.slide-controls button:hover {
-  background: rgba(0, 0, 0, 0.7);
-}
-
-@media (max-width: 600px) {
-  .slide-controls button {
-    font-size: 2rem;
-    padding: 6px 12px;
-  }
-}
-/* Hide menu on mobile */
-.nav-menu {
-  display: none;
-}
-
-/* Show menu when active */
-.nav-menu.active {
-  display: block;
-}
-
-/* Desktop view */
-@media (min-width: 768px) {
-  .nav-menu {
-    display: flex;
-  }
-}
-
-/* --------------------------------------------- */
-/*  FIX: Ensure header and hamburger sit on top  */
-/* --------------------------------------------- */
-header {
-  position: relative;
-  z-index: 2000;
-}
-
-.hamburger {
-  position: relative;
-  z-index: 3000;
-}
-
-/* Prevent slideshow overlay from blocking clicks */
-.hero .overlay {
+/* Prevent inactive slides from blocking clicks */
+.slide {
   pointer-events: none;
 }
-/* Smooth black preload background */
-.hero,
-.slides,
-.slide {
-  background-color: #000;
-}
-
-/* Fade-in transition for slides */
-.slide {
-  opacity: 0;
-  transition: opacity 0.8s ease-in-out;
-}
-
 .slide.active {
-  opacity: 1;
+  pointer-events: auto;
 }
 
-/* Optional: fade-in for entire hero section */
-.hero {
-  opacity: 0;
-  animation: fadeInHero 1s ease-in-out forwards;
+/* Ensure overlays never block interaction */
+.overlay {
+  pointer-events: none !important;
+  z-index: 1 !important;
 }
 
-@keyframes fadeInHero {
-  to {
-    opacity: 1;
-  }
+/* Force all slide content above overlays */
+.slide > *:not(.overlay) {
+  position: relative;
+  z-index: 2 !important;
+  pointer-events: auto;
 }
+
+/* Normalize stacking order */
+.slides { z-index: 1; }
+.slide { z-index: 2; }
+.microgrant-slide { z-index: 2; }
+.home-hero-overlay { z-index: 2 !important; }
