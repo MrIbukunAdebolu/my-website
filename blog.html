@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nexus Blog</title>
 
-  <!-- Global Styles -->
-  <link rel="stylesheet" href="style.css" />
-
-  <!-- Markdown Renderer -->
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-
-  <!-- Self-contained Navigation Styles -->
+  <!-- Self-contained Navigation + Layout Styles (placed FIRST to avoid corruption) -->
   <style>
-    /* Header layering fix */
+    /* Root wrapper to prevent layout escape */
+    #page-root {
+      display: block;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Header fix: force visibility */
     header {
+      background-color: #000 !important;
+      color: #fff !important;
       position: relative;
       z-index: 2000;
+      width: 100%;
     }
 
     .nav-container {
@@ -27,7 +29,7 @@
     }
 
     .logo {
-      color: #fff;
+      color: #fff !important;
       font-size: 1.4rem;
       text-decoration: none;
       font-weight: bold;
@@ -73,7 +75,7 @@
       }
 
       .nav-menu a {
-        color: #fff;
+        color: #fff !important;
         padding: 12px 20px;
         border-bottom: 1px solid #444;
         text-decoration: none;
@@ -97,45 +99,116 @@
       }
 
       .nav-menu a {
-        color: #fff;
+        color: #fff !important;
         text-decoration: none;
         padding: 10px;
+        font-weight: 500;
+      }
+
+      .nav-menu a:hover {
+        color: #00bcd4;
       }
     }
-  header nav.nav-menu a {
-  color: #fff !important;
-  text-decoration: none !important;
-  font-weight: 500;
-  padding: 10px;
-}
 
+    /* Blog Grid */
+    #post-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+      padding: 0;
+      list-style: none;
+    }
 
+    .post-preview {
+      background: #111;
+      padding: 20px;
+      border-radius: 10px;
+      color: #fff;
+      border: 1px solid #333;
+    }
 
+    .post-preview h2 {
+      margin-top: 0;
+    }
+
+    .post-meta {
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+
+    .btn {
+      margin-top: 10px;
+      padding: 10px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn.primary {
+      background: #00bcd4;
+      color: #000;
+    }
+
+    .btn.secondary {
+      background: #333;
+      color: #fff;
+    }
+
+    /* Footer */
+    footer {
+      background: #000;
+      color: #fff;
+      padding: 40px 20px;
+      margin-top: 60px;
+    }
+
+    .footer-container {
+      display: flex;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .footer-left h3 {
+      margin-bottom: 10px;
+    }
+
+    .footer-bottom {
+      margin-top: 20px;
+      text-align: center;
+      opacity: 0.7;
+    }
   </style>
+
+  <!-- Metadata + External Styles -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nexus Blog</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
 </head>
 
 <body>
+<div id="page-root">
 
   <!-- Header -->
   <header>
     <div class="nav-container">
       <a href="index.html" class="logo">Nexus Space Ltd</a>
 
-      <!-- Hamburger -->
       <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
+        <span></span><span></span><span></span>
       </div>
 
-      <!-- Full Navigation -->
       <nav id="nav-menu" class="nav-menu">
         <a href="index.html">Home</a>
         <a href="about.html">About Us</a>
         <a href="services.html">Our Services</a>
         <a href="careers.html">Careers</a>
         <a href="blog.html">Blog</a>
-           <a href="microgrant.html">Microgrant</a>
+        <a href="microgrant.html">Microgrant</a>
         <a href="contact.html">Contact</a>
       </nav>
     </div>
@@ -155,8 +228,6 @@
         <h3>Nexus Space Ltd</h3>
         <p>Empowering Africa’s next generation of space and climate innovators.</p>
       </div>
-
-    
     </div>
 
     <div class="footer-bottom">
@@ -164,14 +235,15 @@
     </div>
   </footer>
 
+</div>
+
   <!-- Blog Logic -->
   <script src="blog.js"></script>
 
-  <!-- Self-contained Navigation Script -->
+  <!-- Navigation Script -->
   <script>
-    const hamburgr = document.getElementById('hamburger');
+    const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('nav-menu');
-
     hamburger.addEventListener('click', () => {
       navMenu.classList.toggle('active');
     });
