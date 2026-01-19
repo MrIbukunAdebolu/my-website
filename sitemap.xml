@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
+  <!-- Homepage -->
   <url>
     <loc>https://nxspaceng.com/</loc>
     <priority>1.0</priority>
   </url>
 
+  <!-- Outlook / Strategic Page -->
   <url>
     <loc>https://nxspaceng.com/outlook.html</loc>
     <priority>0.9</priority>
   </url>
 
+  <!-- Blog Index -->
   <url>
     <loc>https://nxspaceng.com/blog.html</loc>
     <priority>0.8</priority>
   </url>
 
+  <!-- Blog Posts -->
   <url>
     <loc>https://nxspaceng.com/blog.html?post=MappingAfricasEOValueStream.md</loc>
     <lastmod>2025-09-01</lastmod>
@@ -32,6 +36,12 @@
     <loc>https://nxspaceng.com/blog.html?post=2026StrategicOutlook.md</loc>
     <lastmod>2025-11-10</lastmod>
     <priority>0.6</priority>
+  </url>
+
+  <!-- Microgrant Programme Page -->
+  <url>
+    <loc>https://nxspaceng.com/microgrant/microgrant.html</loc>
+    <priority>0.9</priority>
   </url>
 
 </urlset>
