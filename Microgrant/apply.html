@@ -5,324 +5,166 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Apply – Nexus Microgrant Programme</title>
 
-  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Montserrat:wght@700&display=swap" rel="stylesheet" />
-
-  <!-- Global Site Styles (root folder) -->
   <link rel="stylesheet" href="../style.css" />
 
   <style>
     body {
       font-family: 'Open Sans', sans-serif;
+      background-color: #f7f9fc;
+      margin: 0;
+      padding: 0;
     }
-    .application-wrapper {
-      max-width: 900px;
-      margin: 60px auto;
-      padding: 20px;
+
+    .form-container {
+      max-width: 800px;
+      margin: 40px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     }
-    .application-wrapper h1 {
+
+    h1 {
       font-family: 'Montserrat', sans-serif;
+      text-align: center;
       color: #002b5b;
-      margin-bottom: 10px;
     }
-    .application-wrapper p.intro {
-      margin-bottom: 30px;
-      color: #333;
-    }
-    form.application-form {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px 30px;
-    }
-    .full-width {
-      grid-column: 1 / 3;
-    }
+
     label {
+      font-weight: 600;
+      margin-top: 15px;
       display: block;
-      font-weight: 600;
-      margin-bottom: 6px;
-      color: #002b5b;
     }
-    input, select, textarea {
+
+    input, textarea, select {
       width: 100%;
-      padding: 10px;
-      border-radius: 4px;
+      padding: 12px;
+      margin-top: 6px;
       border: 1px solid #ccc;
-      font-family: 'Open Sans', sans-serif;
-      font-size: 0.95rem;
-    }
-    textarea {
-      min-height: 120px;
-      resize: vertical;
-    }
-    .submit-btn {
-      background-color: #002b5b;
-      color: #fff;
-      border: none;
-      padding: 12px 24px;
       border-radius: 6px;
-      font-weight: 600;
-      cursor: pointer;
       font-size: 1rem;
     }
+
+    .submit-btn {
+      margin-top: 20px;
+      width: 100%;
+      background-color: #002b5b;
+      color: white;
+      padding: 14px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.25s ease;
+    }
+
     .submit-btn:hover {
       background-color: #004080;
     }
-    .note {
-      font-size: 0.9rem;
-      color: #555;
-    }
-    #successMessage {
-      margin-top: 30px;
-      padding: 20px;
+
+    .success-message, .error-message {
+      margin-top: 20px;
+      padding: 15px;
       border-radius: 6px;
-      background: #e6f4ea;
-      color: #1e4620;
       display: none;
+      font-weight: 600;
     }
-    #errorMessage {
-      margin-top: 30px;
-      padding: 20px;
-      border-radius: 6px;
-      background: #fdecea;
-      color: #611a15;
-      display: none;
+
+    .success-message {
+      background-color: #e6f7e6;
+      color: #1a7f1a;
     }
-    .hp-container {
-      position: absolute;
-      left: -9999px;
-      top: -9999px;
-      height: 0;
-      overflow: hidden;
+
+    .error-message {
+      background-color: #fdeaea;
+      color: #b30000;
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Navigation -->
-  <header>
-    <div class="nav-container">
-      <a href="../index.html" class="logo">Nexus Space Ltd</a>
+  <div class="form-container">
+    <h1>Microgrant Application Form</h1>
 
-      <div class="hamburger" id="hamburger">
-        <span></span><span></span><span></span>
+    <form id="micrograntForm" enctype="multipart/form-data">
+
+      <label>Full Name</label>
+      <input type="text" name="fullName" required />
+
+      <label>Email Address</label>
+      <input type="email" name="email" required />
+
+      <label>Country of Residence</label>
+      <input type="text" name="country" required />
+
+      <label>Project Title</label>
+      <input type="text" name="projectTitle" required />
+
+      <label>Project Summary</label>
+      <textarea name="projectSummary" rows="4" required></textarea>
+
+      <label>Proposal Document (PDF)</label>
+      <input type="file" name="proposalFile" accept=".pdf" required />
+
+      <label>Budget & Financial Need Statement (PDF)</label>
+      <input type="file" name="budgetFile" accept=".pdf" required />
+
+      <label>Endorsement Letter (PDF)</label>
+      <input type="file" name="endorsementFile" accept=".pdf" required />
+
+      <button type="submit" class="submit-btn">Submit Application</button>
+
+      <div class="success-message" id="successMessage">
+        Your application has been submitted successfully.
       </div>
 
-      <nav id="nav-menu" class="nav-menu">
-        <a href="../index.html">Home</a>
-        <a href="../index.html#about">About Us</a>
-        <a href="../index.html#services">Our Services</a>
-        <a href="../career.html">Careers</a>
-        <a href="../index.html#leadership">Leadership</a>
-        <a href="../blog.html">Blog</a>
-        <a href="../microgrant.html">Microgrant</a>
-        <a href="../index.html#contact">Contact Us</a>
-      </nav>
-    </div>
-  </header>
-
-  <div class="application-wrapper">
-    <h1>Nexus Microgrant Application</h1>
-    <p class="intro">
-      Please complete this form carefully. Required documents include a proposal, budget & financial need statement, and an endorsement letter.
-    </p>
-
-    <form id="micrograntForm" class="application-form" enctype="multipart/form-data" method="post">
-
-      <!-- Honeypot -->
-      <div class="hp-container">
-        <label for="website">Website</label>
-        <input type="text" name="website" id="website" autocomplete="off" tabindex="-1">
+      <div class="error-message" id="errorMessage">
+        Something went wrong. Please try again.
       </div>
 
-      <!-- Identity -->
-      <div>
-        <label for="fullName">Full Name *</label>
-        <input type="text" id="fullName" name="fullName" required>
-      </div>
-
-      <div>
-        <label for="email">Email *</label>
-        <input type="email" id="email" name="email" required>
-      </div>
-
-      <div>
-        <label for="phone">Phone Number *</label>
-        <input type="text" id="phone" name="phone" required>
-      </div>
-
-      <div>
-        <label for="country">Country of Residence *</label>
-        <input type="text" id="country" name="country" required>
-      </div>
-
-      <!-- Background -->
-      <div>
-        <label for="status">Current Status *</label>
-        <select id="status" name="status" required>
-          <option value="">Select...</option>
-          <option value="Student">Student</option>
-          <option value="Early-career professional">Early-career professional</option>
-          <option value="Emerging researcher">Emerging researcher</option>
-        </select>
-      </div>
-
-      <div>
-        <label for="field">Field of Work *</label>
-        <input type="text" id="field" name="field" placeholder="e.g. Earth observation, climate resilience, geospatial analysis" required>
-      </div>
-
-      <div class="full-width">
-        <label for="affiliation">Affiliation / Institution / Organization</label>
-        <input type="text" id="affiliation" name="affiliation">
-      </div>
-
-      <!-- Project -->
-      <div class="full-width">
-        <label for="projectTitle">Project Title *</label>
-        <input type="text" id="projectTitle" name="projectTitle" required>
-      </div>
-
-      <div class="full-width">
-        <label for="summary">Project Summary / Description *</label>
-        <textarea id="summary" name="summary" required></textarea>
-      </div>
-
-      <div>
-        <label for="activityType">Type of Activity *</label>
-        <input type="text" id="activityType" name="activityType" placeholder="Fieldwork, conference, training, prototype, mapping, etc." required>
-      </div>
-
-      <div>
-        <label for="location">Location of Activity</label>
-        <input type="text" id="location" name="location">
-      </div>
-
-      <div>
-        <label for="startDate">Start Date *</label>
-        <input type="date" id="startDate" name="startDate" required>
-      </div>
-
-      <div>
-        <label for="endDate">End Date *</label>
-        <input type="date" id="endDate" name="endDate" required>
-      </div>
-
-      <!-- Financial -->
-      <div>
-        <label for="funding">Funding Requested (USD) *</label>
-        <input type="number" id="funding" name="funding" required>
-      </div>
-
-      <div class="full-width">
-        <label for="budgetBreakdown">Budget Breakdown *</label>
-        <textarea id="budgetBreakdown" name="budgetBreakdown" required></textarea>
-      </div>
-
-      <div class="full-width">
-        <label for="financialNeed">Financial Need Statement *</label>
-        <textarea id="financialNeed" name="financialNeed" required></textarea>
-      </div>
-
-      <!-- Cohort -->
-      <div>
-        <label for="cohort">Cohort *</label>
-        <select id="cohort" name="cohort" required>
-          <option value="">Select...</option>
-          <option value="Cohort A (Jan–Jun)">Cohort A (Jan–Jun)</option>
-          <option value="Cohort B (Jul–Dec)">Cohort B (Jul–Dec)</option>
-        </select>
-      </div>
-
-      <!-- Files -->
-      <div class="full-width">
-        <label for="proposalFile">Proposal (PDF) *</label>
-        <input type="file" id="proposalFile" name="proposalFile" accept="application/pdf" required>
-      </div>
-
-      <div class="full-width">
-        <label for="budgetFile">Budget & Financial Need Statement (PDF) *</label>
-        <input type="file" id="budgetFile" name="budgetFile" accept="application/pdf" required>
-      </div>
-
-      <div class="full-width">
-        <label for="endorsementFile">Endorsement Letter (PDF) *</label>
-        <input type="file" id="endorsementFile" name="endorsementFile" accept="application/pdf" required>
-      </div>
-
-      <div class="full-width note">
-        By submitting, you confirm that all information provided is accurate and that funds will be used for the stated activity.
-      </div>
-
-      <div class="full-width">
-        <button type="submit" class="submit-btn">Submit Application</button>
-      </div>
     </form>
-
-    <div id="successMessage">
-      <h3>Thank you! Your application has been submitted.</h3>
-      <p>We have received your details and documents. You will receive an email if your application progresses.</p>
-    </div>
-
-    <div id="errorMessage">
-      <h3>Something went wrong.</h3>
-      <p>Please try again in a few minutes. If the issue persists, contact info@nxspaceng.com.</p>
-    </div>
   </div>
 
-  <footer>
-    <p>&copy; 2026 Nexus Space Ltd. All rights reserved.</p>
-  </footer>
+  <script>
+    const form = document.getElementById("micrograntForm");
+    const successMsg = document.getElementById("successMessage");
+    const errorMsg = document.getElementById("errorMessage");
 
-<script>
-  const FORM = document.getElementById('micrograntForm');
-  const SUCCESS = document.getElementById('successMessage');
-  const ERROR = document.getElementById('errorMessage');
+    const WEB_APP_URL = "YOUR_WEB_APP_URL_HERE";
 
-  FORM.addEventListener('submit', async function (e) {
-    e.preventDefault();
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
 
-    SUCCESS.style.display = 'none';
-    ERROR.style.display = 'none';
+      successMsg.style.display = "none";
+      errorMsg.style.display = "none";
 
-    const formData = new FormData(FORM);
+      const fd = new FormData(form);
 
-    try {
-      const response = await fetch('https://script.google.com/macros/s/AKfycbwyel1LDGslpzQ4Co7vUpypSVBo84OZxLSgSh11duJYKFFZTQEmAH1Uasb03Msshh0-/exec', {
-        method: 'POST',
-        body: formData
-      });
-
-      const text = await response.text();
-      console.log('Raw response:', text);
-
-      let result;
       try {
-        result = JSON.parse(text);
-      } catch (parseErr) {
-        console.error('JSON parse error:', parseErr);
-        ERROR.style.display = 'block';
-        return;
-      }
+        const response = await fetch(WEB_APP_URL, {
+          method: "POST",
+          body: fd
+        });
 
-      console.log('Parsed result:', result);
+        if (!response.ok) throw new Error("Network error");
 
-      if (result.status === 'success') {
-        FORM.style.display = 'none';
-        SUCCESS.style.display = 'block';
-      } else if (result.status === 'spam') {
-        FORM.style.display = 'none';
-        SUCCESS.style.display = 'block';
-      } else {
-        ERROR.style.display = 'block';
+        const result = await response.text();
+
+        if (result.includes("success")) {
+          successMsg.style.display = "block";
+          form.reset();
+        } else {
+          errorMsg.style.display = "block";
+        }
+
+      } catch (err) {
+        errorMsg.style.display = "block";
       }
-    } catch (err) {
-      console.error('Fetch error:', err);
-      ERROR.style.display = 'block';
-    }
-  });
-</script>
+    });
+  </script>
 
 </body>
 </html>
