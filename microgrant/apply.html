@@ -44,10 +44,11 @@
       border: 1px solid #ccc;
       border-radius: 6px;
       font-size: 1rem;
+      box-sizing: border-box;
     }
 
     .submit-btn {
-      margin-top: 20px;
+      margin-top: 24px;
       width: 100%;
       background-color: #002b5b;
       color: white;
@@ -81,6 +82,16 @@
       background-color: #fdeaea;
       color: #b30000;
     }
+
+    /* Honeypot hidden */
+    .hidden {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      height: 0 !important;
+      width: 0 !important;
+      pointer-events: none !important;
+    }
   </style>
 </head>
 
@@ -91,21 +102,67 @@
 
     <form id="micrograntForm" enctype="multipart/form-data">
 
+      <!-- HONEYPOT -->
+      <input type="text" name="website" class="hidden" autocomplete="off" />
+
+      <!-- EXACT BACKEND FIELD ORDER -->
+
       <label>Full Name</label>
       <input type="text" name="fullName" required />
 
       <label>Email Address</label>
       <input type="email" name="email" required />
 
+      <label>Phone Number</label>
+      <input type="text" name="phone" required />
+
       <label>Country of Residence</label>
       <input type="text" name="country" required />
+
+      <label>Status (Student, Early‑career, Researcher, etc.)</label>
+      <input type="text" name="status" required />
+
+      <label>Field of Work / Study</label>
+      <input type="text" name="field" required />
+
+      <label>Affiliation (Institution / Organisation)</label>
+      <input type="text" name="affiliation" required />
 
       <label>Project Title</label>
       <input type="text" name="projectTitle" required />
 
       <label>Project Summary</label>
-      <textarea name="projectSummary" rows="4" required></textarea>
+      <textarea name="summary" rows="4" required></textarea>
 
+      <label>Activity Type (Fieldwork, Conference, Training, Prototype, etc.)</label>
+      <input type="text" name="activityType" required />
+
+      <label>Activity Location (City, Country)</label>
+      <input type="text" name="location" required />
+
+      <label>Start Date</label>
+      <input type="date" name="startDate" required />
+
+      <label>End Date</label>
+      <input type="date" name="endDate" required />
+
+      <label>Funding Requested (USD)</label>
+      <input type="number" name="funding" min="0" step="0.01" required />
+
+      <label>Budget Breakdown</label>
+      <textarea name="budgetBreakdown" rows="3" required></textarea>
+
+      <label>Financial Need Statement</label>
+      <textarea name="financialNeed" rows="3" required></textarea>
+
+      <label>Cohort</label>
+      <select name="cohort" required>
+        <option value="">Select Cohort</option>
+        <option value="Cohort A (Jan–Jun)">Cohort A (Jan–Jun)</option>
+        <option value="Cohort B (Jul–Dec)">Cohort B (Jul–Dec)</option>
+      </select>
+
+      <!-- FILE UPLOADS -->
       <label>Proposal Document (PDF)</label>
       <input type="file" name="proposalFile" accept=".pdf" required />
 
@@ -115,6 +172,7 @@
       <label>Endorsement Letter (PDF)</label>
       <input type="file" name="endorsementFile" accept=".pdf" required />
 
+      <!-- SUBMIT -->
       <button type="submit" class="submit-btn">Submit Application</button>
 
       <div class="success-message" id="successMessage">
@@ -149,11 +207,9 @@
           body: fd
         });
 
-        if (!response.ok) throw new Error("Network error");
-
         const result = await response.text();
 
-        if (result.includes("success")) {
+        if (response.ok && result.includes("success")) {
           successMsg.style.display = "block";
           form.reset();
         } else {
