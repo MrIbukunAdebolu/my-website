@@ -13,24 +13,12 @@
       padding: 20px;
       line-height: 1.6;
     }
-    input {
+    input, button {
       width: 100%;
       padding: 12px;
-      margin: 10px 0 20px;
       font-size: 16px;
+      margin-bottom: 16px;
     }
-    button {
-      padding: 12px 20px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-    .info, .error {
-      padding: 12px;
-      margin-bottom: 20px;
-      border-left: 4px solid;
-    }
-    .info { background: #eef7ff; border-color: #0077cc; }
-    .error { background: #ffe5e5; border-color: #cc0000; }
   </style>
 </head>
 
@@ -38,66 +26,17 @@
 
   <h1>Start Your Nexus Microgrant Application</h1>
 
-  <div id="statusBox"></div>
+  <form
+    action="https://script.google.com/macros/s/AKfycbz0NhxOncIJrAab5Ob6nAGYMlZQRPnnj4CKRUACOj_0P44NYUBZY6_yFgFOaAyp7Dcc/exec"
+    method="POST">
 
-  <label>Email Address</label>
-  <input type="email" id="emailInput" placeholder="you@example.com" required />
+    <input type="hidden" name="action" value="createSession" />
 
-  <button id="startBtn">Start Application</button>
+    <label>Email Address</label>
+    <input type="email" name="email" required placeholder="you@example.com" />
 
-  <script>
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbw9wyj-4NeTEVbqfJQwAqeGZjbM7yTVueKQgOhvc_BuVvn6BQT1QEFWW-78k2TI7Zwy/exec"; // Replace after deployment
-    const statusBox = document.getElementById("statusBox");
-
-    function showStatus(msg, type = "info") {
-      statusBox.innerHTML = `<div class="${type}">${msg}</div>`;
-    }
-    async function startSession() {
-      const email = document.getElementById("emailInput").value.trim();
-
-      if (!email) {
-        showStatus("Please enter a valid email address.", "error");
-        return;
-      }
-
-      showStatus("Creating your application session…", "info");
-
-           const res = await fetch(WEB_APP_URL, {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    action: "createSession",
-    email
-  })
-});
-
-if (result.status === "success" && result.resumeUrl) {
-  showStatus("Session created. Redirecting…", "info");
-  setTimeout(() => {
-    window.location.href = result.resumeUrl;
-  }, 800);
-} else {
-  showStatus(result.message || "Failed to create session.", "error");
-}
-
-
-
-      const result = await res.json();
-
-      if (result.status === "success") {
-        showStatus("Session created. Redirecting…", "info");
-        setTimeout(() => {
-          window.location.href = result.resumeUrl;
-        }, 800);
-      } else {
-        showStatus(result.message, "error");
-      }
-    }
-
-    document.getElementById("startBtn").onclick = startSession;
-  </script>
+    <button type="submit">Start Application</button>
+  </form>
 
 </body>
 </html>
