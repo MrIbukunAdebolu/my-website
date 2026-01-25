@@ -7,29 +7,6 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Montserrat:wght@700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../style.css" />
- <!-- Navigation -->
-  <header>
-    <div class="nav-container">
-      <a href="index.html" class="logo">Nexus Space Ltd</a>
-
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-
-      <nav id="nav-menu" class="nav-menu">
-        <a href="../index.html">Home</a>
-        <a href="../index.html#about">About Us</a>
-        <a href="../index.html#services">Our Services</a>
-        <a href="../career.html">Careers</a>
-        <a href="../index.html#leadership">Leadership</a>
-        <a href="../blog.html">Blog</a>
-        <a href="microgrant.html">Microgrant</a>
-        <a href="../index.html#contact">Contact Us</a>
-      </nav>
-    </div>
-  </header>
 
   <style>
     body {
@@ -106,7 +83,6 @@
       color: #b30000;
     }
 
-    /* Honeypot hidden */
     .hidden {
       display: none !important;
       visibility: hidden !important;
@@ -120,16 +96,39 @@
 
 <body>
 
+  <!-- Navigation -->
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="logo">Nexus Space Ltd</a>
+
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <nav id="nav-menu" class="nav-menu">
+        <a href="../index.html">Home</a>
+        <a href="../index.html#about">About Us</a>
+        <a href="../index.html#services">Our Services</a>
+        <a href="../career.html">Careers</a>
+        <a href="../index.html#leadership">Leadership</a>
+        <a href="../blog.html">Blog</a>
+        <a href="microgrant.html">Microgrant</a>
+        <a href="../index.html#contact">Contact Us</a>
+      </nav>
+    </div>
+  </header>
+
   <div class="form-container">
     <h1>Microgrant Application Form</h1>
 
     <form id="micrograntForm" enctype="multipart/form-data">
 
-      <!-- HONEYPOT -->
+      <!-- Honeypot -->
       <input type="text" name="website" class="hidden" autocomplete="off" />
 
-      <!-- EXACT BACKEND FIELD ORDER -->
-
+      <!-- Backend-aligned fields -->
       <label>Full Name</label>
       <input type="text" name="fullName" required />
 
@@ -157,10 +156,10 @@
       <label>Project Summary</label>
       <textarea name="summary" rows="4" required></textarea>
 
-      <label>Activity Type (Fieldwork, Conference, Training, Prototype, etc.)</label>
+      <label>Activity Type</label>
       <input type="text" name="activityType" required />
 
-      <label>Activity Location (City, Country)</label>
+      <label>Activity Location</label>
       <input type="text" name="location" required />
 
       <label>Start Date</label>
@@ -185,7 +184,7 @@
         <option value="Cohort B (Jul–Dec)">Cohort B (Jul–Dec)</option>
       </select>
 
-      <!-- FILE UPLOADS -->
+      <!-- File uploads -->
       <label>Proposal Document (PDF)</label>
       <input type="file" name="proposalFile" accept=".pdf" required />
 
@@ -195,7 +194,6 @@
       <label>Endorsement Letter (PDF)</label>
       <input type="file" name="endorsementFile" accept=".pdf" required />
 
-      <!-- SUBMIT -->
       <button type="submit" class="submit-btn">Submit Application</button>
 
       <div class="success-message" id="successMessage">
@@ -214,7 +212,7 @@
     const successMsg = document.getElementById("successMessage");
     const errorMsg = document.getElementById("errorMessage");
 
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwOWVT-mrZsesiTvBT1L5vCzghUAZVoZ9HJ4mrNp1l_Ptqo9diSVDKOrg6-dfxOawJB/exec";
+    const WEB_APP_URL = "YOUR_WEB_APP_URL_HERE";
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -244,9 +242,10 @@
       }
     });
   </script>
-<!-- Footer -->
+
   <footer>
     <p>&copy; 2026 Nexus Space Ltd. All rights reserved.</p>
   </footer>
+
 </body>
 </html>
