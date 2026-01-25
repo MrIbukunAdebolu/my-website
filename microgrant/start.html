@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Start Your Application</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0 20px;
+      font-size: 16px;
+    }
+    button {
+      padding: 12px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .info, .error {
+      padding: 12px;
+      margin-bottom: 20px;
+      border-left: 4px solid;
+    }
+    .info { background: #eef7ff; border-color: #0077cc; }
+    .error { background: #ffe5e5; border-color: #cc0000; }
+  </style>
+</head>
+
+<body>
+
+  <h1>Start Your Nexus Microgrant Application</h1>
+
+  <div id="statusBox"></div>
+
+  <label>Email Address</label>
+  <input type="email" id="emailInput" placeholder="you@example.com" required />
+
+  <button id="startBtn">Start Application</button>
+
+  <script>
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycby4yICR3ZJphGGbUlL9Xh08PJgp6U1ZLR3WhXQdqQPvQdaVDC7-q31c46Qf_4TPh3jH/exec"; // Replace after deployment
+    const statusBox = document.getElementById("statusBox");
+
+    function showStatus(msg, type = "info") {
+      statusBox.innerHTML = `<div class="${type}">${msg}</div>`;
+    }
+
+    async function startSession() {
+      const email = document.getElementById("emailInput").value.trim();
+
+      if (!email) {
+        showStatus("Please enter a valid email address.", "error");
+        return;
+      }
+
+      showStatus("Creating your application session…", "info");
+
+      const res = await fetch(WEB_APP_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "createSession",
+          email
+        })
+      });
+
+      const result = await res.json();
+
+      if (result.status === "success") {
+        showStatus("Session created. Redirecting…", "info");
+        setTimeout(() => {
+          window.location.href = result.resumeUrl;
+        }, 800);
+      } else {
+        showStatus(result.message, "error");
+      }
+    }
+
+    document.getElementById("startBtn").onclick = startSession;
+  </script>
+
+</body>
+</html>
