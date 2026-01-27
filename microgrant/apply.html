@@ -36,23 +36,6 @@
     button:hover {
       background: #005fa3;
     }
-
-    #statusBox {
-      margin-bottom: 20px;
-    }
-
-    #submittingOverlay {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(255,255,255,0.85);
-      backdrop-filter: blur(2px);
-      z-index: 9999;
-      text-align: center;
-      padding-top: 200px;
-      font-size: 20px;
-      color: #333;
-    }
   </style>
 </head>
 
@@ -60,92 +43,36 @@
 
   <h1>Nexus Microgrant Application</h1>
 
-  <div id="statusBox"></div>
+  <form action="https://script.google.com/macros/s/AKfycbxlmWRBZ9DcPoWt07r40cTxH0Wb-mvoWKafeoLNdlbOEbypUTAM5V-nIxmNSNwgE8nDtA/exec" method="POST">
+    <input type="hidden" name="action" value="submit">
 
-  <div id="submittingOverlay">
-    Submitting your application… please wait.
-  </div>
+    <label>Full Name</label>
+    <input type="text" name="fullName" required>
 
-  <div id="form-container">
+    <label>Email Address</label>
+    <input type="email" name="email" required>
 
-    <!-- Hidden iframe to capture Apps Script response -->
-    <iframe name="hiddenFrame" style="display:none;"></iframe>
+    <label>Project Summary</label>
+    <textarea name="projectSummary" rows="5" required></textarea>
 
-    <form id="appForm"
-          action="https://script.google.com/macros/s/AKfycbxlmWRBZ9DcPoWt07r40cTxH0Wb-mvoWKafeoLNdlbOEbypUTAM5V-nIxmNSNwgE8nDtA/exec"
-          method="POST"
-          target="hiddenFrame">
+    <label>Expected Impact</label>
+    <textarea name="impact" rows="5" required></textarea>
 
-      <input type="hidden" name="action" value="submit">
+    <label>Timeline</label>
+    <textarea name="timeline" rows="4" required></textarea>
 
-      <label>Full Name</label>
-      <input type="text" name="fullName" required>
+    <label>Budget Explanation</label>
+    <textarea name="budget" rows="4" required></textarea>
 
-      <label>Email Address</label>
-      <input type="email" name="email" required>
+    <button type="submit">Submit Application</button>
+  </form>
 
-      <label>Project Summary</label>
-      <textarea name="projectSummary" rows="5" required></textarea>
+  <br>
 
-      <label>Expected Impact</label>
-      <textarea name="impact" rows="5" required></textarea>
-
-      <label>Timeline</label>
-      <textarea name="timeline" rows="4" required></textarea>
-
-      <label>Budget Explanation</label>
-      <textarea name="budget" rows="4" required></textarea>
-
-      <button type="submit">Submit Application</button>
-    </form>
-
-    <br>
-
-    <button onclick="window.location.href='https://nxspaceng.com/microgrant.html'"
-            style="background:#555;">
-      Exit
-    </button>
-
-  </div>
-
-  <script>
-    let submitTimeout = null;
-
-    // Called by Apps Script after successful submission
-    function showSuccessMessage() {
-      clearTimeout(submitTimeout);
-      document.getElementById("submittingOverlay").style.display = "none";
-
-      const container = document.getElementById("form-container");
-      container.innerHTML = `
-        <div style="padding:20px; background:#e8ffe8; border-left:5px solid #28a745;">
-          <h2>Application Submitted</h2>
-          <p>Your application has been successfully submitted. Thank you!</p>
-        </div>
-      `;
-    }
-
-    // Called if Apps Script does not respond in time
-    function showErrorMessage() {
-      document.getElementById("submittingOverlay").style.display = "none";
-
-      const status = document.getElementById("statusBox");
-      status.innerHTML = `
-        <div style="padding:20px; background:#ffe5e5; border-left:5px solid #cc0000;">
-          <h2>Submission Failed</h2>
-          <p>We could not submit your application. Please check your internet connection and try again.</p>
-        </div>
-      `;
-    }
-
-    // When the user submits the form
-    document.getElementById("appForm").addEventListener("submit", () => {
-      document.getElementById("submittingOverlay").style.display = "block";
-
-      // If Apps Script doesn't respond within 10 seconds → error
-      submitTimeout = setTimeout(showErrorMessage, 10000);
-    });
-  </script>
+  <button onclick="window.location.href='https://nxspaceng.com/microgrant.html'"
+          style="background:#555;">
+    Exit
+  </button>
 
 </body>
 </html>
