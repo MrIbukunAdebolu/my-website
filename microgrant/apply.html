@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Nexus Microgrant Application</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <style>
     body {
@@ -13,21 +13,46 @@
       padding: 20px;
       line-height: 1.6;
     }
-    textarea, input {
+
+    input, textarea {
       width: 100%;
       padding: 10px;
-      margin: 8px 0 20px;
+      margin-bottom: 20px;
       font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
     }
+
     button {
       padding: 12px 20px;
       font-size: 16px;
-      margin-right: 10px;
       cursor: pointer;
+      border: none;
+      border-radius: 4px;
+      background: #0077cc;
+      color: white;
     }
-    .info { background: #eef7ff; padding: 10px; margin-bottom: 20px; border-left: 4px solid #0077cc; }
-    .warning { background: #fff4e5; padding: 10px; margin-bottom: 20px; border-left: 4px solid #ff9900; }
-    .error { background: #ffe5e5; padding: 10px; margin-bottom: 20px; border-left: 4px solid #cc0000; }
+
+    button:hover {
+      background: #005fa3;
+    }
+
+    #statusBox {
+      margin-bottom: 20px;
+    }
+
+    #submittingOverlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(2px);
+      z-index: 9999;
+      text-align: center;
+      padding-top: 200px;
+      font-size: 20px;
+      color: #333;
+    }
   </style>
 </head>
 
@@ -37,147 +62,90 @@
 
   <div id="statusBox"></div>
 
-  <!-- USER FORM -->
-  <form id="appForm">
-    <label>Full Name</label>
-    <input type="text" name="fullName" required />
+  <div id="submittingOverlay">
+    Submitting your application… please wait.
+  </div>
 
-    <label>Email Address</label>
-    <input type="email" name="email" required />
+  <div id="form-container">
 
-    <label>Project Summary</label>
-    <textarea name="projectSummary" rows="5" required></textarea>
+    <!-- Hidden iframe to capture Apps Script response -->
+    <iframe name="hiddenFrame" style="display:none;"></iframe>
 
-    <label>Expected Impact</label>
-    <textarea name="impact" rows="5" required></textarea>
+    <form id="appForm"
+          action="YOUR_WEB_APP_URL_HERE"
+          method="POST"
+          target="hiddenFrame">
 
-    <label>Timeline</label>
-    <textarea name="timeline" rows="4" required></textarea>
+      <input type="hidden" name="action" value="submit">
 
-    <label>Budget Explanation</label>
-    <textarea name="budget" rows="4" required></textarea>
-  </form>
+      <label>Full Name</label>
+      <input type="text" name="fullName" required>
 
-  <button id="saveBtn">Save</button>
-  <button id="submitBtn">Submit</button>
-  <button id="exitBtn">Exit</button>
+      <label>Email Address</label>
+      <input type="email" name="email" required>
+
+      <label>Project Summary</label>
+      <textarea name="projectSummary" rows="5" required></textarea>
+
+      <label>Expected Impact</label>
+      <textarea name="impact" rows="5" required></textarea>
+
+      <label>Timeline</label>
+      <textarea name="timeline" rows="4" required></textarea>
+
+      <label>Budget Explanation</label>
+      <textarea name="budget" rows="4" required></textarea>
+
+      <button type="submit">Submit Application</button>
+    </form>
+
+    <br>
+
+    <button onclick="window.location.href='https://nxspaceng.com/microgrant.html'"
+            style="background:#555;">
+      Exit
+    </button>
+
+  </div>
 
   <script>
-    const WEB_APP_URL =
-      "https://script.google.com/macros/s/AKfycbxlmWRBZ9DcPoWt07r40cTxH0Wb-mvoWKafeoLNdlbOEbypUTAM5V-nIxmNSNwgE8nDtA/exec";
+    let submitTimeout = null;
 
-    const EXIT_REDIRECT = "https://nxspaceng.com/microgrant.html";
+    // Called by Apps Script after successful submission
+    function showSuccessMessage() {
+      clearTimeout(submitTimeout);
+      document.getElementById("submittingOverlay").style.display = "none";
 
-    const urlParams = new URLSearchParams(window.location.search);
-    let token = urlParams.get("token") || localStorage.getItem("nexus_token") || null;
-
-    const statusBox = document.getElementById("statusBox");
-    const form = document.getElementById("appForm");
-
-    function showStatus(msg, type = "info") {
-      statusBox.innerHTML = `<div class="${type}">${msg}</div>`;
+      const container = document.getElementById("form-container");
+      container.innerHTML = `
+        <div style="padding:20px; background:#e8ffe8; border-left:5px solid #28a745;">
+          <h2>Application Submitted</h2>
+          <p>Your application has been successfully submitted. Thank you!</p>
+        </div>
+      `;
     }
 
-    function getFormData() {
-      const data = {};
-      new FormData(form).forEach((value, key) => {
-        data[key] = value;
-      });
-      return data;
+    // Called if Apps Script does not respond in time
+    function showErrorMessage() {
+      document.getElementById("submittingOverlay").style.display = "none";
+
+      const status = document.getElementById("statusBox");
+      status.innerHTML = `
+        <div style="padding:20px; background:#ffe5e5; border-left:5px solid #cc0000;">
+          <h2>Submission Failed</h2>
+          <p>We could not submit your application. Please check your internet connection and try again.</p>
+        </div>
+      `;
     }
 
-    async function postToBackend(action, extra = {}) {
-      const body = new URLSearchParams({
-        action,
-        email: extra.email || "",
-        token: extra.token || "",
-        data: extra.data || ""
-      });
+    // When the user submits the form
+    document.getElementById("appForm").addEventListener("submit", () => {
+      document.getElementById("submittingOverlay").style.display = "block";
 
-      const response = await fetch(WEB_APP_URL, {
-        method: "POST",
-        body
-      });
-
-      return response.json();
-    }
-
-    async function loadSession() {
-      if (!token) return;
-
-      const result = await postToBackend("load", { token });
-
-      if (result.status === "expired") {
-        showStatus("Your session has expired. Please start again.", "error");
-        localStorage.removeItem("nexus_token");
-        token = null;
-        return;
-      }
-
-      if (result.partialData) {
-        Object.keys(result.partialData).forEach(key => {
-          if (form.elements[key]) form.elements[key].value = result.partialData[key];
-        });
-        showStatus("Session loaded.", "info");
-      }
-    }
-
-    async function handleSave(isExit = false) {
-      const data = JSON.stringify(getFormData());
-
-      if (!token) {
-        const result = await postToBackend("createSession", {
-          email: form.elements["email"].value,
-          data
-        });
-
-        if (result.status === "created") {
-          token = result.token;
-          localStorage.setItem("nexus_token", token);
-
-          const newUrl = window.location.pathname + "?token=" + token;
-          window.history.replaceState({}, "", newUrl);
-
-          showStatus("Progress saved. You can resume later.", "info");
-
-          if (isExit) window.location.href = EXIT_REDIRECT;
-        }
-
-        return;
-      }
-
-      const result = await postToBackend("save", { token, data });
-
-      if (result.status === "locked") {
-        showStatus("You have reached the maximum number of saves.", "warning");
-        return;
-      }
-
-      showStatus("Progress saved.", "info");
-
-      if (isExit) window.location.href = EXIT_REDIRECT;
-    }
-
-    async function handleSubmit() {
-      const data = JSON.stringify(getFormData());
-
-      const result = await postToBackend("submit", {
-        email: form.elements["email"].value,
-        token,
-        data
-      });
-
-      if (result.status === "success") {
-        localStorage.removeItem("nexus_token");
-        window.location.href = EXIT_REDIRECT;
-      }
-    }
-
-    document.getElementById("saveBtn").addEventListener("click", () => handleSave(false));
-    document.getElementById("exitBtn").addEventListener("click", () => handleSave(true));
-    document.getElementById("submitBtn").addEventListener("click", handleSubmit);
-
-    loadSession();
+      // If Apps Script doesn't respond within 10 seconds → error
+      submitTimeout = setTimeout(showErrorMessage, 10000);
+    });
   </script>
+
 </body>
 </html>
