@@ -77,4 +77,125 @@
   <button id="exitBtn">Exit</button>
 
   <script>
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycby8xpWnJwTwIWwC4GpUEj42mq2RQAVlsKaQzpKaaFfJryNdyKhrTuE-6-KUyb459hqVAA/exec"; // Replace after deployment
+    const WEB_APP_URL =
+      "https://script.google.com/macros/s/AKfycby2rOVCgsd4HM44R6GCI8d0oHA8bx4vh48bOq9HCJ1z0A61BQVRTfDwP93kYD6Q48wRSQ/exec";
+
+    const urlParams = new URLSearchParams(window.location.search);
+    let token = urlParams.get("token") || localStorage.getItem("nexus_token") || null;
+    let emailParam = urlParams.get("email") || null;
+
+    const statusBox = document.getElementById("statusBox");
+    const form = document.getElementById("appForm");
+
+    function showStatus(msg, type = "info") {
+      statusBox.innerHTML = `<div class="${type}">${msg}</div>`;
+    }
+
+    function getFormData() {
+      const data = {};
+      new FormData(form).forEach((value, key) => {
+        data[key] = value;
+      });
+      return data;
+    }
+
+    async function post(action, extra = {}) {
+      const payload = { action, ...extra };
+      const res = await fetch(WEB_APP_URL, {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: { "Content-Type": "application/json" }
+      });
+      return res.json();
+    }
+
+    async function loadSession() {
+      if (!token) return;
+
+      const result = await post("load", { token });
+
+      if (result.status === "expired") {
+        showStatus("Your session has expired. Please start again.", "error");
+        localStorage.removeItem("nexus_token");
+        token = null;
+        return;
+      }
+
+      if (result.status === "success") {
+        const data = result.partialData || {};
+        Object.keys(data).forEach(key => {
+          if (form.elements[key]) form.elements[key].value = data[key];
+        });
+        showStatus("Session loaded. You may continue your application.");
+      }
+    }
+
+    async function handleSave(isExit = false) {
+      const data = getFormData();
+
+      if (!token) {
+        const result = await post("createSession", {
+          email: data.email,
+          data
+        });
+
+        if (result.status === "created") {
+          token = result.token;
+          localStorage.setItem("nexus_token", token);
+
+          const newUrl = window.location.pathname + "?token=" + token;
+          window.history.replaceState({}, "", newUrl);
+
+          showStatus("Progress saved. You can resume later.", "info");
+
+          if (isExit) window.location.href = "thankyou.html";
+        }
+        return;
+      }
+
+      const result = await post("save", { token, data });
+
+      if (result.status === "locked") {
+        showStatus("You have reached the maximum number of saves.", "warning");
+        return;
+      }
+
+      if (result.status === "success") {
+        showStatus("Progress saved.", "info");
+        if (isExit) window.location.href = "thankyou.html";
+      }
+    }
+
+    async function handleSubmit() {
+      const data = getFormData();
+
+      if (!token) {
+        const result = await post("submit", {
+          email: data.email,
+          data
+        });
+
+        if (result.status === "success") {
+          showStatus("Application submitted successfully!", "info");
+          form.reset();
+          return;
+        }
+      }
+
+      const result = await post("submit", { token, data });
+
+      if (result.status === "success") {
+        localStorage.removeItem("nexus_token");
+        showStatus("Application submitted successfully!", "info");
+        form.reset();
+      }
+    }
+
+    document.getElementById("saveBtn").addEventListener("click", () => handleSave(false));
+    document.getElementById("exitBtn").addEventListener("click", () => handleSave(true));
+    document.getElementById("submitBtn").addEventListener("click", handleSubmit);
+
+    loadSession();
+  </script>
+</body>
+</html>
