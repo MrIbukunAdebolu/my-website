@@ -62,17 +62,6 @@
   <button id="submitBtn">Submit</button>
   <button id="exitBtn">Exit</button>
 
-  <!-- HIDDEN IFRAME FOR RESPONSES -->
-  <iframe name="hiddenFrame" id="hiddenFrame" style="display:none;"></iframe>
-
-  <!-- HIDDEN BACKEND FORMS -->
-  <form id="backendForm" method="POST" target="hiddenFrame" style="display:none;">
-    <input type="hidden" name="action" />
-    <input type="hidden" name="email" />
-    <input type="hidden" name="token" />
-    <input type="hidden" name="data" />
-  </form>
-
   <script>
     const WEB_APP_URL =
       "https://script.google.com/macros/s/AKfycbxlmWRBZ9DcPoWt07r40cTxH0Wb-mvoWKafeoLNdlbOEbypUTAM5V-nIxmNSNwgE8nDtA/exec";
@@ -84,8 +73,6 @@
 
     const statusBox = document.getElementById("statusBox");
     const form = document.getElementById("appForm");
-    const backendForm = document.getElementById("backendForm");
-    const iframe = document.getElementById("hiddenFrame");
 
     function showStatus(msg, type = "info") {
       statusBox.innerHTML = `<div class="${type}">${msg}</div>`;
@@ -99,54 +86,26 @@
       return data;
     }
 
-    function submitBackend(action, extra = {}) {
-      backendForm.action = WEB_APP_URL;
+    async function postToBackend(action, extra = {}) {
+      const body = new URLSearchParams({
+        action,
+        email: extra.email || "",
+        token: extra.token || "",
+        data: extra.data || ""
+      });
 
-      backendForm.elements["action"].value = action;
-      backendForm.elements["email"].value = extra.email || "";
-      backendForm.elements["token"].value = extra.token || "";
-      backendForm.elements["data"].value = extra.data || "";
+      const response = await fetch(WEB_APP_URL, {
+        method: "POST",
+        body
+      });
 
-      backendForm.submit();
+      return response.json();
     }
 
-    iframe.onload = function () {
-      try {
-        const doc = iframe.contentDocument || iframe.contentWindow.document;
-        const pre = doc.getElementById("response");
-        if (!pre) return;
+    async function loadSession() {
+      if (!token) return;
 
-        const result = JSON.parse(pre.textContent);
-
-        handleResponse(result);
-      } catch (e) {
-        console.log("Iframe parse error:", e);
-      }
-    };
-
-    function handleResponse(result) {
-      if (!result || !result.status) return;
-
-      if (result.status === "created") {
-        token = result.token;
-        localStorage.setItem("nexus_token", token);
-
-        const newUrl = window.location.pathname + "?token=" + token;
-        window.history.replaceState({}, "", newUrl);
-
-        showStatus("Progress saved. You can resume later.", "info");
-        return;
-      }
-
-      if (result.status === "success") {
-        showStatus("Operation successful.", "info");
-        return;
-      }
-
-      if (result.status === "locked") {
-        showStatus("You have reached the maximum number of saves.", "warning");
-        return;
-      }
+      const result = await postToBackend("load", { token });
 
       if (result.status === "expired") {
         showStatus("Your session has expired. Please start again.", "error");
@@ -163,42 +122,55 @@
       }
     }
 
-    function loadSession() {
-      if (!token) return;
-      submitBackend("load", { token });
-    }
-
-    function handleSave(isExit = false) {
+    async function handleSave(isExit = false) {
       const data = JSON.stringify(getFormData());
 
       if (!token) {
-        submitBackend("createSession", {
+        const result = await postToBackend("createSession", {
           email: form.elements["email"].value,
           data
         });
 
-        if (isExit) window.location.href = EXIT_REDIRECT;
+        if (result.status === "created") {
+          token = result.token;
+          localStorage.setItem("nexus_token", token);
+
+          const newUrl = window.location.pathname + "?token=" + token;
+          window.history.replaceState({}, "", newUrl);
+
+          showStatus("Progress saved. You can resume later.", "info");
+
+          if (isExit) window.location.href = EXIT_REDIRECT;
+        }
+
         return;
       }
 
-      submitBackend("save", { token, data });
+      const result = await postToBackend("save", { token, data });
+
+      if (result.status === "locked") {
+        showStatus("You have reached the maximum number of saves.", "warning");
+        return;
+      }
+
+      showStatus("Progress saved.", "info");
 
       if (isExit) window.location.href = EXIT_REDIRECT;
     }
 
-    function handleSubmit() {
+    async function handleSubmit() {
       const data = JSON.stringify(getFormData());
 
-      if (!token) {
-        submitBackend("submit", {
-          email: form.elements["email"].value,
-          data
-        });
-        return;
-      }
+      const result = await postToBackend("submit", {
+        email: form.elements["email"].value,
+        token,
+        data
+      });
 
-      submitBackend("submit", { token, data });
-      localStorage.removeItem("nexus_token");
+      if (result.status === "success") {
+        localStorage.removeItem("nexus_token");
+        window.location.href = EXIT_REDIRECT;
+      }
     }
 
     document.getElementById("saveBtn").addEventListener("click", () => handleSave(false));
