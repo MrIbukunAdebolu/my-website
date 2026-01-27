@@ -3,76 +3,117 @@
 <head>
   <meta charset="UTF-8">
   <title>Nexus Microgrant Application</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 700px;
-      margin: 40px auto;
-      padding: 20px;
-      line-height: 1.6;
+    body { font-family: Arial, sans-serif; background:#f7f9fc; }
+    .container { max-width:900px; margin:50px auto; background:#fff; padding:30px; }
+    label { font-weight:600; display:block; margin-top:15px; }
+    input, textarea, select {
+      width:100%; padding:10px; margin-top:6px;
+      border:1px solid #ccc; border-radius:4px;
     }
-
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 20px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-
+    textarea { min-height:120px; }
     button {
-      padding: 12px 20px;
-      font-size: 16px;
-      cursor: pointer;
-      border: none;
-      border-radius: 4px;
-      background: #0077cc;
-      color: white;
+      margin-top:25px;
+      padding:12px 24px;
+      background:#002b5b;
+      color:#fff;
+      border:none;
+      cursor:pointer;
     }
-
-    button:hover {
-      background: #005fa3;
-    }
+    .hp { position:absolute; left:-9999px; }
   </style>
 </head>
 
 <body>
 
+<div class="container">
   <h1>Nexus Microgrant Application</h1>
 
-  <form action="https://script.google.com/macros/s/AKfycbxlmWRBZ9DcPoWt07r40cTxH0Wb-mvoWKafeoLNdlbOEbypUTAM5V-nIxmNSNwgE8nDtA/exec" method="POST">
-    <input type="hidden" name="action" value="submit">
+  <!-- IMPORTANT: action points directly to Apps Script -->
+  <form
+    method="POST"
+    action="https://script.google.com/macros/s/AKfycbyZzkl5lWTTv9IUNajFP8iCP0BhDoao8PbBrRcmzb50p-SwNz7v52Z_vGClG-r5SJ0i/exec"
+    enctype="multipart/form-data"
+  >
 
-    <label>Full Name</label>
-    <input type="text" name="fullName" required>
+    <!-- Honeypot -->
+    <input class="hp" type="text" name="website">
 
-    <label>Email Address</label>
+    <label>Full Name *</label>
+    <input name="fullName" required>
+
+    <label>Email *</label>
     <input type="email" name="email" required>
 
-    <label>Project Summary</label>
-    <textarea name="projectSummary" rows="5" required></textarea>
+    <label>Phone *</label>
+    <input name="phone" required>
 
-    <label>Expected Impact</label>
-    <textarea name="impact" rows="5" required></textarea>
+    <label>Country *</label>
+    <input name="country" required>
 
-    <label>Timeline</label>
-    <textarea name="timeline" rows="4" required></textarea>
+    <label>Status *</label>
+    <select name="status" required>
+      <option value="">Select…</option>
+      <option>Student</option>
+      <option>Early-career professional</option>
+      <option>Emerging researcher</option>
+    </select>
 
-    <label>Budget Explanation</label>
-    <textarea name="budget" rows="4" required></textarea>
+    <label>Field of Work *</label>
+    <input name="field" required>
+
+    <label>Affiliation</label>
+    <input name="affiliation">
+
+    <label>Project Title *</label>
+    <input name="projectTitle" required>
+
+    <label>Project Summary *</label>
+    <textarea name="summary" required></textarea>
+
+    <label>Activity Type *</label>
+    <input name="activityType" required>
+
+    <label>Location</label>
+    <input name="location">
+
+    <label>Start Date *</label>
+    <input type="date" name="startDate" required>
+
+    <label>End Date *</label>
+    <input type="date" name="endDate" required>
+
+    <label>Funding Requested (USD) *</label>
+    <input type="number" name="funding" required>
+
+    <label>Budget Breakdown *</label>
+    <textarea name="budgetBreakdown" required></textarea>
+
+    <label>Financial Need *</label>
+    <textarea name="financialNeed" required></textarea>
+
+    <label>Cohort *</label>
+    <select name="cohort" required>
+      <option value="">Select…</option>
+      <option>Cohort A (Jan–Jun)</option>
+      <option>Cohort B (Jul–Dec)</option>
+    </select>
+
+    <!-- Files INCLUDED but NOT handled -->
+    <label>Proposal (PDF)</label>
+    <input type="file" name="proposalFile">
+
+    <label>Budget (PDF)</label>
+    <input type="file" name="budgetFile">
+
+    <label>Endorsement Letter (PDF)</label>
+    <input type="file" name="endorsementFile">
 
     <button type="submit">Submit Application</button>
+
   </form>
-
-  <br>
-
-  <button onclick="window.location.href='https://nxspaceng.com/microgrant.html'"
-          style="background:#555;">
-    Exit
-  </button>
+</div>
 
 </body>
 </html>
