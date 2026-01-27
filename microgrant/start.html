@@ -1,42 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Start Your Application</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <title>Nexus Microgrant – Start Application</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
     body {
       font-family: Arial, sans-serif;
-      max-width: 600px;
-      margin: 40px auto;
-      padding: 20px;
-      line-height: 1.6;
+      background: #f7f7f7;
+      padding: 40px;
+      display: flex;
+      justify-content: center;
     }
-    input, button {
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    input[type="email"] {
       width: 100%;
       padding: 12px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
       font-size: 16px;
-      margin-bottom: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #0066ff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0053cc;
     }
   </style>
 </head>
 
 <body>
+  <div class="container">
+    <h2>Start Your Application</h2>
 
-  <h1>Start Your Nexus Microgrant Application</h1>
+    <form id="startForm">
+      <input type="email" id="email" placeholder="Enter your email" required>
+      <button type="submit">Begin</button>
+    </form>
+  </div>
 
-  <form
-    action="https://script.google.com/macros/s/AKfycbxtF570O9OIy8Ext-x_C_3KQ8Km6W2vsSsiU5WJMX8c0_RHN_qhHwdLsF-EqWM2rHznLg/exec"
-    method="POST">
+  <script>
+    document.getElementById("startForm").addEventListener("submit", function (e) {
+      e.preventDefault();
 
-    <input type="hidden" name="action" value="createSession" />
+      const email = document.getElementById("email").value.trim();
 
-    <label>Email Address</label>
-    <input type="email" name="email" required placeholder="you@example.com" />
+      if (!email) return;
 
-    <button type="submit">Start Application</button>
-  </form>
-
+      // Redirect to apply.html with email parameter
+      window.location.href = "apply.html?email=" + encodeURIComponent(email);
+    });
+  </script>
 </body>
 </html>
