@@ -77,6 +77,8 @@
     const WEB_APP_URL =
       "https://script.google.com/macros/s/AKfycbxlmWRBZ9DcPoWt07r40cTxH0Wb-mvoWKafeoLNdlbOEbypUTAM5V-nIxmNSNwgE8nDtA/exec";
 
+    const EXIT_REDIRECT = "https://nxspaceng.com/microgrant.html";
+
     const urlParams = new URLSearchParams(window.location.search);
     let token = urlParams.get("token") || localStorage.getItem("nexus_token") || null;
 
@@ -174,10 +176,14 @@
           email: form.elements["email"].value,
           data
         });
+
+        if (isExit) window.location.href = EXIT_REDIRECT;
         return;
       }
 
       submitBackend("save", { token, data });
+
+      if (isExit) window.location.href = EXIT_REDIRECT;
     }
 
     function handleSubmit() {
