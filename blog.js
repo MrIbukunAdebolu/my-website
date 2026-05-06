@@ -38,7 +38,7 @@ function renderPostList() {
   const postList = document.getElementById("post-list");
   const contentDiv = document.getElementById("content");
   
-  postList.style.display = "flex";
+  postList.style.display = "block";
   contentDiv.innerHTML = "";
   postList.innerHTML = "";
 
