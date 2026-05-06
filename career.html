@@ -11,7 +11,7 @@
     gtag('config', 'G-PV6C235WVG');
   </script>
 
-  <!-- Self-contained Brand Styles (placed FIRST to avoid corruption) -->
+  <!-- Self-contained Brand Styles -->
   <style>
     :root {
       --brand-blue: #0057b8;
@@ -133,7 +133,7 @@
       }
     }
 
-    /* Career Page Layout: vertical stacked list */
+    /* Career Page Layout */
     #post-list {
       display: flex;
       flex-direction: column;
@@ -223,8 +223,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nexus Careers</title>
   <link rel="stylesheet" href="style.css" />
- <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
 
 </head>
 
@@ -233,3 +232,58 @@
 
   <!-- Header -->
   <header>
+    <div class="nav-container">
+      <a href="/index.html" class="logo">Nexus Space Ltd</a>
+
+      <div class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+
+      <nav id="nav-menu" class="nav-menu">
+        <a href="/index.html">Home</a>
+        <a href="/about.html">About Us</a>
+        <a href="/services.html">Our Services</a>
+        <a href="/career.html">Careers</a>
+        <a href="/blog.html">Blog</a>
+        <a href="/microgrant.html">Microgrant</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Career Content -->
+  <section class="container">
+    <ul id="post-list"></ul>
+    <div id="content"></div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-left">
+        <h3>Nexus Space Ltd</h3>
+        <p>Empowering Africa’s next generation of space and climate innovators.</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2025 Nexus Space Ltd. All rights reserved.</p>
+    </div>
+  </footer>
+
+</div>
+
+<!-- Career Logic -->
+<script src="career.js"></script>
+
+<!-- Navigation Script -->
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const navMenu = document.getElementById('nav-menu');
+  hamburger.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+  });
+</script>
+
+</body>
+</html>
