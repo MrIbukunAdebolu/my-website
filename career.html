@@ -1,41 +1,234 @@
 <!DOCTYPE html>
 <html lang="en">
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PV6C235WVG"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-PV6C235WVG');
-</script>
 <head>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PV6C235WVG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PV6C235WVG');
+  </script>
+
+  <!-- Self-contained Brand Styles (placed FIRST to avoid corruption) -->
+  <style>
+    :root {
+      --brand-blue: #0057b8;
+      --font-size-base: 16px;
+      --font-family: 'Open Sans', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-family);
+      font-size: var(--font-size-base);
+      background-color: #fff;
+      color: #000;
+    }
+
+    #page-root {
+      display: block;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Header */
+    header {
+      background-color: #fff;
+      color: var(--brand-blue);
+      position: relative;
+      z-index: 2000;
+      width: 100%;
+      border-bottom: 1px solid #eee;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .logo {
+      color: var(--brand-blue);
+      font-size: 1.4rem;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .hamburger {
+      position: relative;
+      z-index: 3000;
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background-color: var(--brand-blue);
+      border-radius: 2px;
+    }
+
+    /* Mobile Navigation */
+    @media (max-width: 768px) {
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-menu {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        background-color: #fff;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        z-index: 2500;
+      }
+
+      .nav-menu.active {
+        display: flex;
+      }
+
+      .nav-menu a {
+        color: #002b5b;
+        padding: 12px 20px;
+        border-bottom: 1px solid #eee;
+        text-decoration: none;
+      }
+
+      .nav-menu a:last-child {
+        border-bottom: none;
+      }
+    }
+
+    /* Desktop Navigation */
+    @media (min-width: 769px) {
+      .nav-menu {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+      }
+
+      .hamburger {
+        display: none;
+      }
+
+      .nav-menu a {
+        color: var(--brand-blue);
+        text-decoration: none;
+        padding: 10px;
+        font-weight: 500;
+      }
+
+      .nav-menu a:hover {
+        text-decoration: underline;
+      }
+    }
+
+    /* Career Page Layout: vertical stacked list */
+    #post-list {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      margin: 40px 20px 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .post-preview {
+      background: #f9f9f9;
+      padding: 20px;
+      border-radius: 10px;
+      color: #000;
+      border: 1px solid #ddd;
+      display: flex;
+      flex-direction: column;
+      min-height: 180px;
+    }
+
+    .post-preview h2 {
+      margin-top: 0;
+      font-size: 1.3rem;
+      color: var(--brand-blue);
+    }
+
+    .post-meta {
+      font-size: 0.9rem;
+      opacity: 0.6;
+      margin-bottom: 10px;
+    }
+
+    .btn.primary {
+      margin-top: auto;
+      background: var(--brand-blue);
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .btn.primary:hover {
+      opacity: 0.9;
+    }
+
+    .full-post {
+      margin: 40px 20px;
+      padding: 20px;
+      background: #f9f9f9;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+    }
+
+    .btn.secondary {
+      background: #ddd;
+      color: #000;
+      padding: 10px 15px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Footer */
+    footer {
+      background: #000;
+      color: #fff;
+      padding: 40px 20px;
+      margin-top: 60px;
+    }
+
+    .footer-container {
+      display: flex;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .footer-bottom {
+      margin-top: 20px;
+      text-align: center;
+      opacity: 0.7;
+    }
+  </style>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Career</title>
+  <title>Nexus Careers</title>
   <link rel="stylesheet" href="style.css" />
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
 </head>
-<body>
-  <!-- rest of your HTML stays the same -->
-<body>
 
+<body>
+<div id="page-root">
+
+  <!-- Header -->
   <header>
-    <div class="nav-container">
-      <a href="index.html" class="logo">Nexus Space Ltd</a>
-      <nav class="nav-menu">
-        <a href="index.html">Home</a>
-        <a href="career.html">career<a>
-      </nav>
-    </div>
-  </header>
-
-  <section class="container">
-    <h1>Open Positions</h1>
-    <ul id="post-list"></ul>
-    <div id="content"></div>
-  </section>
-
-  <script src="career.js"></script>
-</body>
-</html>
